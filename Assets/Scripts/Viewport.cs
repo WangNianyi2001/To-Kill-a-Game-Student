@@ -16,8 +16,8 @@ public class Viewport : MonoBehaviour {
 	}
 
 	public void UpdateCamera(Transform root, Transform target) {
-		camera.transform.position = mask.localToWorldMatrix.MultiplyPoint
-			(root.worldToLocalMatrix.MultiplyPoint(target.position));
+		var camPos = root.worldToLocalMatrix.MultiplyPoint(target.position);
+		camera.transform.position = mask.localToWorldMatrix.MultiplyPoint(camPos);
 		camera.transform.rotation = mask.rotation * Quaternion.Inverse(root.rotation) * target.rotation;
 	}
 

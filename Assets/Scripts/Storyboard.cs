@@ -8,9 +8,7 @@ public class Storyboard : MonoBehaviour {
 
 	void Start() {
 		// Set viewport Stencil mask
-		var sprite = GetComponent<SpriteRenderer>().sprite;
-		Vector3 scale = transform.localScale / sprite.pixelsPerUnit;
-		viewport.mask.localScale = scale;
+		viewport.mask.localScale = transform.localScale;
 		Shader stencilShader = Shader.Find("Custom/Stencil");
 		var material = new Material(stencilShader);
 		material.SetInteger("_StencilID", viewport.StencilID);
