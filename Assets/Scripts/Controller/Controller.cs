@@ -13,7 +13,7 @@ public class Controller : MonoBehaviour {
 		rotation = transform.rotation;
 	}
 
-	protected virtual void FixedUpdate() {
+	protected virtual void Update() {
 		damping = Mathf.Clamp(damping, 0, Mathf.Infinity);
 		if(damping < .01f) {
 			transform.position = position;

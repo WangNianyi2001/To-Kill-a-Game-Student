@@ -11,7 +11,7 @@ public class CameraImitator : Controller {
 		camera = GetComponent<Camera>();
 	}
 
-	protected override void FixedUpdate() {
+	protected override void Update() {
 		if(camera == null || target == null)
 			return;
 		if(sourceBasis == null)
@@ -27,6 +27,6 @@ public class CameraImitator : Controller {
 		position = destinationBasis.localToWorldMatrix.MultiplyPoint(localPosition);
 		destinationBasis.localScale = destinationScale;
 		rotation = destinationBasis.rotation * Quaternion.Inverse(sourceBasis.rotation) * target.transform.rotation;
-		base.FixedUpdate();
+		base.Update();
 	}
 }

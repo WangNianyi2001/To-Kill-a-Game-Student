@@ -5,7 +5,8 @@ using UnityEngine.Rendering.Universal;
 public class Viewport : MonoBehaviour {
 	static byte nextStencilID = 1;
 
-	[SerializeReference] public Storyboard storyboard;
+	public Storyboard storyboard;
+	public Camera soul;
 
 	public readonly byte stencilID;
 
