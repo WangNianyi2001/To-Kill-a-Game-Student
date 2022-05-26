@@ -23,14 +23,6 @@ public class Page : MonoBehaviour {
 
 	public void ViewBoard(Storyboard board) => ViewBoard(board, blendTime);
 
-	void CheckMouseClick() {
-		Ray ray = camera.ScreenPointToRay(Input.mousePosition);
-		var hit = Physics2D.Raycast(ray.origin, ray.direction, Mathf.Infinity, LayerMask.GetMask("Storyboard"));
-		Storyboard board = hit.collider?.GetComponent<Storyboard>();
-		if(board == null)
-			return;
-	}
-
 	void Start() {
 		brain = GetComponentInChildren<Cinemachine.CinemachineBrain>();
 		current = this;
@@ -44,7 +36,5 @@ public class Page : MonoBehaviour {
 	void Update() {
 		foreach(var storyboard in storyboards)
 			storyboard.viewport.UpdateCamera(storyboard.transform, brain.transform);
-		if(Input.GetMouseButtonDown(0))
-			CheckMouseClick();
 	}
 }
