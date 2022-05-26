@@ -4,10 +4,17 @@ using UnityEngine.Rendering.Universal;
 
 public class Viewport : MonoBehaviour {
 	static byte nextStencilID = 1;
-	byte stencilID;
-	public byte StencilID => stencilID;
+
+	[SerializeReference] public Storyboard storyboard;
+
+	public readonly byte stencilID;
+
+	public Viewport() {
+		stencilID = ++nextStencilID;
+	}
 
 	[NonSerialized] public new Camera camera;
+	[NonSerialized] public CameraImitator imitator;
 	[NonSerialized] public Transform mask;
 
 	public bool Visible {
@@ -22,18 +29,7 @@ public class Viewport : MonoBehaviour {
 	}
 
 	void Start() {
-		stencilID = nextStencilID++;
-
-		// Camera settings
-		var camObj = new GameObject("Camera");
-		camObj.transform.SetParent(transform);
-		camObj.transform.position = Vector3.zero;
-		camObj.transform.rotation = Quaternion.identity;
-		camObj.transform.localScale = Vector3.one;
-		camera = camObj.AddComponent<Camera>();
-		UniversalAdditionalCameraData urpCamera = camObj.AddComponent<UniversalAdditionalCameraData>();
-		urpCamera.renderType = CameraRenderType.Overlay;
-		urpCamera.SetRenderer(stencilID + 1);
+		storyboard.viewport = this;
 
 		// Create Stencil mask
 		var maskObj = new GameObject("Stencil Mask");
@@ -44,5 +40,26 @@ public class Viewport : MonoBehaviour {
 		mask.localRotation = Quaternion.identity;
 		var maskRenderer = maskObj.AddComponent<SpriteRenderer>();
 		maskRenderer.sprite = Resources.Load<Sprite>("Sprite/White");
+
+		// Set Stencil mask
+		mask.localScale = storyboard.transform.localScale;
+		Shader stencilShader = Shader.Find("Custom/Stencil");
+		var material = new Material(stencilShader);
+		material.SetInteger("_StencilID", stencilID);
+		mask.GetComponent<SpriteRenderer>().material = material;
+
+		// Camera settings
+		var camObj = new GameObject("Camera");
+		camObj.transform.SetParent(transform);
+		camObj.transform.localScale = Vector3.one;
+		camera = camObj.AddComponent<Camera>();
+		UniversalAdditionalCameraData urpCamera = camObj.AddComponent<UniversalAdditionalCameraData>();
+		urpCamera.renderType = CameraRenderType.Overlay;
+		urpCamera.SetRenderer(stencilID + 1);
+		Page.current.urp.cameraStack.Add(camera);
+		imitator = camObj.AddComponent<CameraImitator>();
+		imitator.target = Page.current.camera;
+		imitator.destinationBasis = mask;
+		imitator.sourceBasis = storyboard.transform;
 	}
 }

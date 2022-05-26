@@ -60,6 +60,9 @@
     <Compile Include="Assets\Scripts\Protagonist.cs" />
     <Compile Include="Assets\Scripts\Viewport.cs" />
     <Compile Include="Assets\Scripts\Page.cs" />
+    <Compile Include="Assets\Scripts\Controller\CameraImitator.cs" />
+    <Compile Include="Assets\Scripts\Controller\Controller.cs" />
+    <Compile Include="Assets\Scripts\Level.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Rendering\Shaders\Stencil.shader" />

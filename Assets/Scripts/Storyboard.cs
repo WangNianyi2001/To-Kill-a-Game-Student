@@ -1,22 +1,11 @@
+using System;
 using UnityEngine;
-using Cinemachine;
 
 public class Storyboard : MonoBehaviour {
-	CinemachineVirtualCamera vCam;
-
-	public Viewport viewport;
+	[NonSerialized] public Viewport viewport;
 
 	void Start() {
-		// Set viewport Stencil mask
-		viewport.mask.localScale = transform.localScale;
-		Shader stencilShader = Shader.Find("Custom/Stencil");
-		var material = new Material(stencilShader);
-		material.SetInteger("_StencilID", viewport.StencilID);
-		viewport.mask.GetComponent<SpriteRenderer>().material = material;
-
-		// Self initializations
-		vCam = transform.parent.GetComponentInChildren<CinemachineVirtualCamera>();
-		state = State.Disabled;
+		state = State.Visible;
 	}
 
 	public enum State {
@@ -30,7 +19,7 @@ public class Storyboard : MonoBehaviour {
 		set {
 			_state = value;
 			viewport.Visible = _state != State.Disabled;
-			vCam.enabled = _state == State.Active;
+			viewport.imitator.enabled = _state != State.Active;
 		}
 	}
 }

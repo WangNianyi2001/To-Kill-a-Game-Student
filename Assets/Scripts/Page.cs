@@ -1,40 +1,37 @@
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
 public class Page : MonoBehaviour {
 	public static Page current = null;
+	[NonSerialized] public new Camera camera;
+	[NonSerialized] public UniversalAdditionalCameraData urp;
+	[NonSerialized] CameraImitator imitator;
 
-	IEnumerable<Storyboard> storyboards;
-
-	Cinemachine.CinemachineBrain brain;
-	public new Camera camera => brain.OutputCamera;
 	public Storyboard currentStoryboard;
 
 	public float blendTime = 1.0f;
 
-	public void ViewBoard(Storyboard board, float blendTime) {
-		brain.m_DefaultBlend.m_Time = blendTime;
+	public void ViewBoard(Storyboard board) {
 		if(currentStoryboard != null)
 			currentStoryboard.state = Storyboard.State.Visible;
-		currentStoryboard = board;
-		currentStoryboard.state = Storyboard.State.Active;
+		if((currentStoryboard = board) != null) {
+			currentStoryboard.state = Storyboard.State.Active;
+			imitator.enabled = true;
+			imitator.target = board.viewport.camera;
+			imitator.destinationBasis = board.transform;
+		}
+		else {
+			imitator.enabled = false;
+			imitator.target = null;
+			imitator.destinationBasis = transform;
+		}
 	}
-
-	public void ViewBoard(Storyboard board) => ViewBoard(board, blendTime);
 
 	void Start() {
-		brain = GetComponentInChildren<Cinemachine.CinemachineBrain>();
 		current = this;
-		storyboards = FindObjectsOfType<Storyboard>();
-		var urp = camera.GetComponent<UniversalAdditionalCameraData>();
-		foreach(var storyboard in storyboards)
-			urp.cameraStack.Add(storyboard.viewport.camera);
-		ViewBoard(currentStoryboard, 0);
-	}
-
-	void Update() {
-		foreach(var storyboard in storyboards)
-			storyboard.viewport.UpdateCamera(storyboard.transform, brain.transform);
+		camera = GetComponentInChildren<Camera>();
+		urp = camera.GetComponent<UniversalAdditionalCameraData>();
+		imitator = camera.GetComponent<CameraImitator>();
 	}
 }
