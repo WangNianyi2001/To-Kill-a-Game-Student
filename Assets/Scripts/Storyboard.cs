@@ -1,11 +1,18 @@
-using System;
 using UnityEngine;
 
 public class Storyboard : MonoBehaviour {
-	[NonSerialized] public Viewport viewport;
+	public enum Type {
+		Plain, Viewport
+	}
+	public Type type;
+
+	public Viewport viewport;
+	public Camera soulCamera;
 
 	void Start() {
-		state = State.Visible;
+		if(type == Type.Viewport) {
+			viewport.storyboard = this;
+		}
 	}
 
 	public enum State {
@@ -13,22 +20,17 @@ public class Storyboard : MonoBehaviour {
 		Active,
 		Visible,
 	}
-	State _state;
-	public State state {
-		get => _state;
-		set {
-			_state = value;
-			viewport.Visible = _state != State.Disabled;
-			var vpIm = viewport.imitator;
-			vpIm.enabled = true;
-			if(_state == State.Active) {
-				vpIm.sourceBasis = viewport.mask;
-				vpIm.target = viewport.soul;
-			}
-			else {
-				vpIm.target = Page.current.camera;
-				vpIm.sourceBasis = transform;
-			}
+	public void SetState(State state) {
+		viewport.Visible = state != State.Disabled;
+		var vpIm = viewport.imitator;
+		vpIm.enabled = true;
+		if(state == State.Active) {
+			vpIm.sourceBasis = viewport.mask;
+			vpIm.target = viewport.soulCamera;
+		}
+		else {
+			vpIm.target = Page.current.camera;
+			vpIm.sourceBasis = transform;
 		}
 	}
 }

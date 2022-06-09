@@ -5,8 +5,9 @@ using UnityEngine.Rendering.Universal;
 public class Viewport : MonoBehaviour {
 	static byte nextStencilID = 1;
 
-	public Storyboard storyboard;
-	public Camera soul;
+	[NonSerialized] public Storyboard storyboard;
+	public Camera soulCamera;
+	public ViewportTrigger trigger = null;
 
 	public readonly byte stencilID;
 
@@ -30,7 +31,11 @@ public class Viewport : MonoBehaviour {
 	}
 
 	void Start() {
-		storyboard.viewport = this;
+		if(trigger != null)
+			trigger.viewport = this;
+		var dummySprite = GetComponent<SpriteRenderer>();
+		if(dummySprite != null)
+			Destroy(dummySprite);
 
 		// Create Stencil mask
 		var maskObj = new GameObject("Stencil Mask");
@@ -43,7 +48,7 @@ public class Viewport : MonoBehaviour {
 		maskRenderer.sprite = Resources.Load<Sprite>("Sprite/White");
 
 		// Set Stencil mask
-		mask.localScale = storyboard.transform.localScale;
+		mask.localScale = (storyboard.transform as RectTransform).rect.size;
 		Shader stencilShader = Shader.Find("Custom/Stencil");
 		var material = new Material(stencilShader);
 		material.SetInteger("_StencilID", stencilID);
@@ -62,5 +67,8 @@ public class Viewport : MonoBehaviour {
 		imitator.target = Page.current.camera;
 		imitator.destinationBasis = mask;
 		imitator.sourceBasis = storyboard.transform;
+		imitator.Jump();
+		imitator.positionDamping = Page.current.imitator.positionDamping;
+		imitator.rotationDamping = Page.current.imitator.rotationDamping;
 	}
 }

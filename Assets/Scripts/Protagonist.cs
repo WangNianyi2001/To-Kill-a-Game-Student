@@ -1,27 +1,45 @@
+using System;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.InputSystem;
 
 public class Protagonist : MonoBehaviour {
-	new Rigidbody rigidbody;
+	public static Protagonist current;
+
+	NavMeshAgent agent;
 	new SpriteRenderer renderer;
-	public InputAction movement;
-	public float speed = 2;
+	Vector3 movement;
+	[NonSerialized] public Transform controlBase;
 
 	void Start() {
-		rigidbody = GetComponent<Rigidbody>();
+		current = this;
+		agent = GetComponent<NavMeshAgent>();
+		agent.updateRotation = false;
 		renderer = GetComponent<SpriteRenderer>();
-		movement.Enable();
 	}
 
-	void UpdateMovement() {
-		var movementInput = movement.ReadValue<float>();
-		if(movementInput == 0)
-			return;
-		rigidbody.velocity = transform.right * (speed * movementInput);
-		renderer.flipX = movementInput < 0;
+	public void FaceTo(Vector3 position) {
+		Vector3 euler = transform.rotation.eulerAngles;
+		position -= transform.position;
+		float eulerY = Mathf.Atan2(position.x, position.z);
+		euler.y = eulerY * 180 / Mathf.PI - 180;
+		transform.rotation = Quaternion.Euler(euler);
+	}
+
+	void OnMovement(InputValue value) {
+		Vector2 vec2 = value.Get<Vector2>();
+		movement = Vector3.zero;
+		movement += controlBase.right * vec2.x;
+		movement += controlBase.forward * vec2.y;
+		movement *= agent.speed;
+		if(Mathf.Abs(vec2.x) > 0)
+			renderer.flipX = vec2.x < 0;
 	}
 
 	void Update() {
-		UpdateMovement();
+		var camera = Page.current?.storyboard?.viewport?.camera;
+		if(camera != null)
+			FaceTo(camera.transform.position);
+		agent.velocity = movement;
 	}
 }
