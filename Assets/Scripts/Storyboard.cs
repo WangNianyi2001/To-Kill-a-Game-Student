@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Storyboard : MonoBehaviour {
@@ -8,10 +9,18 @@ public class Storyboard : MonoBehaviour {
 
 	public Viewport viewport;
 	public Camera soulCamera;
+	[NonSerialized] public Transform @base;
 
 	void Start() {
-		if(type == Type.Viewport) {
-			viewport.storyboard = this;
+		switch(type) {
+			case Type.Plain:
+				@base = transform;
+				break;
+			case Type.Viewport:
+				viewport.storyboard = this;
+				soulCamera = viewport.camera;
+				@base = viewport.transform;
+				break;
 		}
 	}
 

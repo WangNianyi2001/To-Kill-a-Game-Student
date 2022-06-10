@@ -4,15 +4,12 @@ using UnityEngine.AI;
 using UnityEngine.InputSystem;
 
 public class Protagonist : MonoBehaviour {
-	public static Protagonist current;
-
 	NavMeshAgent agent;
 	new SpriteRenderer renderer;
 	Vector3 movement;
 	[NonSerialized] public Transform controlBase;
 
 	void Start() {
-		current = this;
 		agent = GetComponent<NavMeshAgent>();
 		agent.updateRotation = false;
 		renderer = GetComponent<SpriteRenderer>();

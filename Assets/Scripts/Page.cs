@@ -13,24 +13,14 @@ public class Page : MonoBehaviour {
 
 	public Storyboard storyboard;
 
-	public float blendTime = 1.0f;
-
-	public void ViewBoard(Storyboard target, bool jump = false) {
+	public void ViewStoryboard(Storyboard target, bool jump = false) {
 		if(storyboard != null)
 			storyboard.SetState(Storyboard.State.Visible);
-		if((storyboard = target) != null) {
-			storyboard.SetState(Storyboard.State.Active);
-			imitator.enabled = true;
-			imitator.target = target.viewport.camera;
-			imitator.sourceBasis = target.viewport.transform;
-			imitator.destinationBasis = target.transform;
-		}
-		else {
-			imitator.enabled = false;
-			imitator.target = null;
-			imitator.sourceBasis = null;
-			imitator.destinationBasis = transform;
-		}
+			target?.SetState(Storyboard.State.Active);
+		imitator.enabled = target != null;
+		imitator.target = target.soulCamera;
+		imitator.sourceBasis = target.@base;
+		imitator.destinationBasis = target?.transform;
 		if(target.viewport.trigger != null)
 			protagonist.controlBase = target.viewport.trigger.transform;
 		if(jump) {
@@ -40,15 +30,19 @@ public class Page : MonoBehaviour {
 		}
 	}
 
-	void Start() {
+	void Awake() {
 		current = this;
 		camera = GetComponentInChildren<Camera>();
 		urp = camera.GetComponent<UniversalAdditionalCameraData>();
 		imitator = camera.GetComponent<CameraImitator>();
+	}
 
+	void Start() {
 		// Disable all camera in scene
-		foreach(Camera cam in FindObjectsOfType<Camera>())
-			cam.enabled = false;
+		foreach(Camera camera in FindObjectsOfType<Camera>())
+			camera.enabled = false;
 		camera.enabled = true;
+
+		ViewStoryboard(storyboard);
 	}
 }
