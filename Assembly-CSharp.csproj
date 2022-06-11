@@ -63,6 +63,7 @@
     <Compile Include="Assets\Scripts\Page.cs" />
     <Compile Include="Assets\Scripts\Controller\Controller.cs" />
     <Compile Include="Assets\Scripts\ViewportTrigger.cs" />
+    <Compile Include="Assets\Scripts\GameManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Rendering\Shaders\Stencil.shader" />

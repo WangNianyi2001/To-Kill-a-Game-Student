@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
@@ -9,11 +11,7 @@ public class Viewport : MonoBehaviour {
 	public Camera soulCamera;
 	public ViewportTrigger trigger = null;
 
-	public readonly byte stencilID;
-
-	public Viewport() {
-		stencilID = ++nextStencilID;
-	}
+	public byte stencilID;
 
 	[NonSerialized] public new Camera camera;
 	[NonSerialized] public CameraImitator imitator;
@@ -30,7 +28,13 @@ public class Viewport : MonoBehaviour {
 		camera.transform.rotation = mask.rotation * Quaternion.Inverse(root.rotation) * target.rotation;
 	}
 
+	void Awake() {
+		nextStencilID = 1;
+	}
+
 	void Start() {
+		stencilID = nextStencilID++;
+
 		if(trigger != null)
 			trigger.viewport = this;
 		var dummySprite = GetComponent<SpriteRenderer>();
@@ -61,7 +65,7 @@ public class Viewport : MonoBehaviour {
 		camera = camObj.AddComponent<Camera>();
 		UniversalAdditionalCameraData urpCamera = camObj.AddComponent<UniversalAdditionalCameraData>();
 		urpCamera.renderType = CameraRenderType.Overlay;
-		urpCamera.SetRenderer(stencilID + 1);
+		urpCamera.SetRenderer(GameManager.CreateViewportRenderer(stencilID));
 		Page.current.urp.cameraStack.Add(camera);
 		imitator = camObj.AddComponent<CameraImitator>();
 		imitator.target = Page.current.camera;

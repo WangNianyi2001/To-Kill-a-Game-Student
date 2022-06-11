@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bf2edee5c58d82540a51f03df9d42094, type: 3}
-  m_Name: Pipeline
+  m_Name: Default Pipeline
   m_EditorClassIdentifier: 
   k_AssetVersion: 9
   k_AssetPreviousVersion: 9
@@ -19,10 +19,6 @@ MonoBehaviour:
   m_RendererDataList:
   - {fileID: 11400000, guid: 2f66967a5a9d48040b680dffd483d70e, type: 2}
   - {fileID: 11400000, guid: 18bb26c105fa55048a6a76e28652d86b, type: 2}
-  - {fileID: 11400000, guid: ca38d3a7e7894d64ea15ac08c1b01406, type: 2}
-  - {fileID: 11400000, guid: 09adf052d99aad347b03d7a0d9a1f82a, type: 2}
-  - {fileID: 11400000, guid: 1ed256b17adc6554a834a5792681bf43, type: 2}
-  - {fileID: 11400000, guid: 4a52e92125b281543925500e228b9266, type: 2}
   m_DefaultRendererIndex: 0
   m_RequireDepthTexture: 0
   m_RequireOpaqueTexture: 0
