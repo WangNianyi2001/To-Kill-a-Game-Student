@@ -595,7 +595,7 @@ GameObject:
   - component: {fileID: 210648291}
   - component: {fileID: 210648289}
   m_Layer: 0
-  m_Name: '# Staircase 0'
+  m_Name: Staircase 0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1433,6 +1433,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soulCamera: {fileID: 5074891396173999127}
   trigger: {fileID: 1743481729}
+  stencilID: 1
 --- !u!212 &731287303
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1912,6 +1913,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soulCamera: {fileID: 3031219416826457213}
   trigger: {fileID: 1758662454}
+  stencilID: 2
 --- !u!212 &1376303771
 SpriteRenderer:
   m_ObjectHideFlags: 0
