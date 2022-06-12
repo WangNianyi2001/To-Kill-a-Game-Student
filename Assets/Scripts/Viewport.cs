@@ -1,7 +1,6 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Rendering.Universal;
 
 public class Viewport : MonoBehaviour {
@@ -42,21 +41,23 @@ public class Viewport : MonoBehaviour {
 			Destroy(dummySprite);
 
 		// Create Stencil mask
-		var maskObj = new GameObject("Stencil Mask");
+		var maskObj = new GameObject("Stencil Mask", new Type[] {
+			typeof(Canvas), typeof(CanvasRenderer)
+		});
 		mask = maskObj.transform;
 		maskObj.layer = LayerMask.NameToLayer("Viewport");
 		mask.SetParent(transform);
 		mask.localPosition = Vector3.zero;
 		mask.localRotation = Quaternion.identity;
-		var maskRenderer = maskObj.AddComponent<SpriteRenderer>();
-		maskRenderer.sprite = Resources.Load<Sprite>("Sprite/White");
+		var maskRenderer = maskObj.AddComponent<RawImage>();
+		maskRenderer.texture = storyboard.GetComponent<RawImage>().texture;
 
 		// Set Stencil mask
-		mask.localScale = (storyboard.transform as RectTransform).rect.size;
+		(mask.transform as RectTransform).sizeDelta = (storyboard.transform as RectTransform).sizeDelta;
 		Shader stencilShader = Shader.Find("Custom/Stencil");
 		var material = new Material(stencilShader);
 		material.SetInteger("_StencilID", stencilID);
-		mask.GetComponent<SpriteRenderer>().material = material;
+		maskRenderer.material = material;
 
 		// Camera settings
 		var camObj = new GameObject("Camera");
