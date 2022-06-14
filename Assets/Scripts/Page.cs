@@ -1,12 +1,10 @@
 using System;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
 
 public class Page : MonoBehaviour {
 	public static Page current = null;
 	[NonSerialized] public new Camera camera;
-	[NonSerialized] public UniversalAdditionalCameraData urp;
-	[NonSerialized] public CameraImitator imitator;
+	[NonSerialized] public PageCamera camCtrl;
 	public Protagonist protagonist;
 
 	[NonSerialized] public bool init = true;
@@ -17,31 +15,30 @@ public class Page : MonoBehaviour {
 		if(storyboard != null)
 			storyboard.SetState(Storyboard.State.Visible);
 			target?.SetState(Storyboard.State.Active);
-		imitator.enabled = target != null;
-		imitator.target = target.soulCamera;
-		imitator.sourceBasis = target.@base;
-		imitator.destinationBasis = target?.transform;
-		if(target.viewport.trigger != null)
-			protagonist.controlBase = target.viewport.trigger.transform;
+		camCtrl.enabled = target != null;
+		camCtrl.target = target?.soulCamera;
+		camCtrl.sourceBasis = target?.@base;
+		camCtrl.destinationBasis = target?.transform;
+		protagonist.controlBase = target?.viewport.trigger?.transform;
 		if(jump) {
 			foreach(var viewport in FindObjectsOfType<Viewport>())
-				viewport.imitator.Jump();
-			imitator.Jump();
+				viewport.camCtrl.Jump();
+			camCtrl.Jump();
 		}
 	}
 
-	void Awake() {
+	void Start() {
 		current = this;
 		camera = GetComponentInChildren<Camera>();
-		urp = camera.GetComponent<UniversalAdditionalCameraData>();
-		imitator = camera.GetComponent<CameraImitator>();
-	}
+		camCtrl = camera.gameObject.AddComponent<PageCamera>();
 
-	void Start() {
 		// Disable all camera in scene
 		foreach(Camera camera in FindObjectsOfType<Camera>())
 			camera.enabled = false;
 		camera.enabled = true;
+
+		foreach(Storyboard storyboard in FindObjectsOfType<Storyboard>())
+			storyboard.Init(this);
 
 		ViewStoryboard(storyboard);
 	}

@@ -1,7 +1,10 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Storyboard : MonoBehaviour {
+	[NonSerialized] public Page page;
+
 	public enum Type {
 		Plain, Viewport
 	}
@@ -11,15 +14,19 @@ public class Storyboard : MonoBehaviour {
 	public Camera soulCamera;
 	[NonSerialized] public Transform @base;
 
-	void Start() {
+	public void Init(Page page) {
+		this.page = page;
 		switch(type) {
 			case Type.Plain:
 				@base = transform;
 				break;
 			case Type.Viewport:
-				viewport.storyboard = this;
+				viewport.Init(this);
 				soulCamera = viewport.camera;
 				@base = viewport.transform;
+				var material = new Material(Shader.Find("StencilWrite"));
+				material.SetInteger("_StencilID", viewport.stencilID);
+				GetComponent<RawImage>().material = material;
 				break;
 		}
 	}
@@ -31,14 +38,14 @@ public class Storyboard : MonoBehaviour {
 	}
 	public void SetState(State state) {
 		viewport.Visible = state != State.Disabled;
-		var vpIm = viewport.imitator;
+		var vpIm = viewport.camCtrl;
 		vpIm.enabled = true;
 		if(state == State.Active) {
 			vpIm.sourceBasis = viewport.mask;
 			vpIm.target = viewport.soulCamera;
 		}
 		else {
-			vpIm.target = Page.current.camera;
+			vpIm.target = page.camera;
 			vpIm.sourceBasis = transform;
 		}
 	}

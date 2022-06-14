@@ -5,8 +5,8 @@ public class ViewportTrigger : MonoBehaviour {
 	[NonSerialized] public Viewport viewport;
 
 	void OnTriggerEnter(Collider other) {
-		Page current = Page.current;
-		current.ViewStoryboard(viewport.storyboard, current.init);
-		current.init = false;
+		Page page = viewport.page;
+		page.ViewStoryboard(viewport.storyboard, page.init);
+		page.init = false;
 	}
 }

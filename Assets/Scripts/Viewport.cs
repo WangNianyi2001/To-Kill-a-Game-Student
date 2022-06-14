@@ -1,11 +1,10 @@
 using System;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.Rendering.Universal;
 
 public class Viewport : MonoBehaviour {
 	static byte nextStencilID = 1;
 
+	[NonSerialized] public Page page;
 	[NonSerialized] public Storyboard storyboard;
 	public Camera soulCamera;
 	public ViewportTrigger trigger = null;
@@ -13,8 +12,9 @@ public class Viewport : MonoBehaviour {
 	public byte stencilID;
 
 	[NonSerialized] public new Camera camera;
-	[NonSerialized] public CameraImitator imitator;
+	[NonSerialized] public ViewportCamera camCtrl;
 	[NonSerialized] public Transform mask;
+	[NonSerialized] public Material maskMaterial;
 
 	public bool Visible {
 		get => camera.enabled;
@@ -36,44 +36,51 @@ public class Viewport : MonoBehaviour {
 
 		if(trigger != null)
 			trigger.viewport = this;
-		var dummySprite = GetComponent<SpriteRenderer>();
-		if(dummySprite != null)
-			Destroy(dummySprite);
+		Destroy(GetComponent<SpriteRenderer>());
 
-		// Create Stencil mask
-		var maskObj = new GameObject("Stencil Mask", new Type[] {
-			typeof(Canvas), typeof(CanvasRenderer)
-		});
-		mask = maskObj.transform;
-		maskObj.layer = LayerMask.NameToLayer("Viewport");
-		mask.SetParent(transform);
-		mask.localPosition = Vector3.zero;
-		mask.localRotation = Quaternion.identity;
-		var maskRenderer = maskObj.AddComponent<RawImage>();
-		maskRenderer.texture = storyboard.GetComponent<RawImage>().texture;
-
-		// Set Stencil mask
-		(mask.transform as RectTransform).sizeDelta = (storyboard.transform as RectTransform).sizeDelta;
-		Shader stencilShader = Shader.Find("Custom/Stencil");
-		var material = new Material(stencilShader);
-		material.SetInteger("_StencilID", stencilID);
-		maskRenderer.material = material;
-
-		// Camera settings
+		// Create camera
 		var camObj = new GameObject("Camera");
 		camObj.transform.SetParent(transform);
 		camObj.transform.localScale = Vector3.one;
 		camera = camObj.AddComponent<Camera>();
-		UniversalAdditionalCameraData urpCamera = camObj.AddComponent<UniversalAdditionalCameraData>();
-		urpCamera.renderType = CameraRenderType.Overlay;
-		urpCamera.SetRenderer(GameManager.CreateViewportRenderer(stencilID));
-		Page.current.urp.cameraStack.Add(camera);
-		imitator = camObj.AddComponent<CameraImitator>();
-		imitator.target = Page.current.camera;
-		imitator.destinationBasis = mask;
-		imitator.sourceBasis = storyboard.transform;
-		imitator.Jump();
-		imitator.positionDamping = Page.current.imitator.positionDamping;
-		imitator.rotationDamping = Page.current.imitator.rotationDamping;
+		camera.depth = 1;
+		camera.clearFlags = CameraClearFlags.Nothing;
+	}
+
+	public void Init(Storyboard storyboard) {
+		this.storyboard = storyboard;
+		page = storyboard.page;
+
+		// Create Stencil mask
+		//var maskObj = new GameObject("Stencil Mask", new Type[] {
+		//	typeof(Canvas), typeof(CanvasRenderer)
+		//});
+		//mask = maskObj.transform;
+		//maskObj.layer = LayerMask.NameToLayer("Viewport");
+		//mask.SetParent(transform);
+		//mask.localPosition = Vector3.zero;
+		//mask.localRotation = Quaternion.identity;
+		//var maskRenderer = maskObj.AddComponent<RawImage>();
+		//maskRenderer.texture = storyboard.GetComponent<RawImage>().texture;
+
+		// Set Stencil mask
+		//(mask.transform as RectTransform).sizeDelta = (storyboard.transform as RectTransform).sizeDelta;
+		//Shader stencilShader = Shader.Find("StencilWrite");
+		//var material = new Material(stencilShader);
+		//material.SetInteger("_StencilID", stencilID);
+		//maskRenderer.material = material;
+
+		// Create viewport mask
+		maskMaterial = new Material(Shader.Find("ViewportMask"));
+		maskMaterial.SetInteger("_StencilID", stencilID);
+
+		// Camera controller
+		camCtrl = camera.gameObject.AddComponent<ViewportCamera>();
+		camCtrl.target = page.camera;
+		camCtrl.destinationBasis = mask;
+		camCtrl.sourceBasis = storyboard.transform;
+		camCtrl.Jump();
+		camCtrl.positionDamping = page.camCtrl.positionDamping;
+		camCtrl.rotationDamping = page.camCtrl.rotationDamping;
 	}
 }
