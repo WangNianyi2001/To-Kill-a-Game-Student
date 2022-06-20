@@ -57,9 +57,8 @@ public class Viewport : MonoBehaviour {
 		maskMaterial.SetInteger("_StencilID", stencilID);
 
 		// Camera controller
-		camCtrl = camera.gameObject.AddComponent<CameraController>();
+		camCtrl = CameraController.CreateOn(camera.gameObject);
 		camCtrl.target = page.camera;
-		camCtrl.transformCtrl = camera.gameObject.AddComponent<TransformController>();
 		camCtrl.transformCtrl.destinationBasis = mask;
 		camCtrl.transformCtrl.sourceBasis = storyboard.transform;
 		camCtrl.transformCtrl.positionDamping = page.camCtrl.transformCtrl.positionDamping;

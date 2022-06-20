@@ -23,8 +23,7 @@ public class Page : MonoBehaviour {
 	void Start() {
 		current = this;
 		camera = GetComponentInChildren<Camera>();
-		camCtrl = camera.gameObject.AddComponent<CameraController>();
-		camCtrl.transformCtrl = camCtrl.gameObject.AddComponent<TransformController>();
+		camCtrl = CameraController.CreateOn(camera.gameObject);
 
 		// Disable all camera in scene
 		foreach(Camera camera in FindObjectsOfType<Camera>())
