@@ -38,15 +38,15 @@ public class Storyboard : MonoBehaviour {
 	}
 	public void SetState(State state) {
 		viewport.Visible = state != State.Disabled;
-		var vpIm = viewport.camCtrl;
-		vpIm.enabled = true;
+		var viewportCtrl = viewport.camCtrl;
+		viewportCtrl.enabled = true;
 		if(state == State.Active) {
-			vpIm.sourceBasis = viewport.mask;
-			vpIm.target = viewport.soulCamera;
+			viewportCtrl.transformCtrl.sourceBasis = viewport.mask;
+			viewportCtrl.target = viewport.soulCamera;
 		}
 		else {
-			vpIm.target = page.camera;
-			vpIm.sourceBasis = transform;
+			viewportCtrl.target = page.camera;
+			viewportCtrl.transformCtrl.sourceBasis = transform;
 		}
 	}
 }

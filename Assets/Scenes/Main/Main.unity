@@ -1817,7 +1817,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09040023eb51a4046acfdb7a8a334388, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soulCamera: {fileID: 0}
+  soulCamera: {fileID: 1764612608}
   trigger: {fileID: 1758662454}
   stencilID: 2
 --- !u!212 &1376303771
@@ -1988,6 +1988,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d15457e37035bc048a77d81777d49515, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!20 &1764612608 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: -6192152621339312061, guid: 25e45b5cca83d6740827acef1f44f26a, type: 3}
+  m_PrefabInstance: {fileID: 374264353}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1939147294
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 public class Viewport : MonoBehaviour {
-	static byte nextStencilID = 1;
+	public static byte nextStencilID = 1;
 
 	[NonSerialized] public Page page;
 	[NonSerialized] public Storyboard storyboard;
@@ -12,7 +12,7 @@ public class Viewport : MonoBehaviour {
 	public byte stencilID;
 
 	[NonSerialized] public new Camera camera;
-	[NonSerialized] public ViewportCamera camCtrl;
+	[NonSerialized] public CameraController camCtrl;
 	[NonSerialized] public Transform mask;
 	[NonSerialized] public Material maskMaterial;
 
@@ -50,37 +50,19 @@ public class Viewport : MonoBehaviour {
 	public void Init(Storyboard storyboard) {
 		this.storyboard = storyboard;
 		page = storyboard.page;
-
-		// Create Stencil mask
-		//var maskObj = new GameObject("Stencil Mask", new Type[] {
-		//	typeof(Canvas), typeof(CanvasRenderer)
-		//});
-		//mask = maskObj.transform;
-		//maskObj.layer = LayerMask.NameToLayer("Viewport");
-		//mask.SetParent(transform);
-		//mask.localPosition = Vector3.zero;
-		//mask.localRotation = Quaternion.identity;
-		//var maskRenderer = maskObj.AddComponent<RawImage>();
-		//maskRenderer.texture = storyboard.GetComponent<RawImage>().texture;
-
-		// Set Stencil mask
-		//(mask.transform as RectTransform).sizeDelta = (storyboard.transform as RectTransform).sizeDelta;
-		//Shader stencilShader = Shader.Find("StencilWrite");
-		//var material = new Material(stencilShader);
-		//material.SetInteger("_StencilID", stencilID);
-		//maskRenderer.material = material;
+		camera.enabled = true;
 
 		// Create viewport mask
 		maskMaterial = new Material(Shader.Find("ViewportMask"));
 		maskMaterial.SetInteger("_StencilID", stencilID);
 
 		// Camera controller
-		camCtrl = camera.gameObject.AddComponent<ViewportCamera>();
+		camCtrl = camera.gameObject.AddComponent<CameraController>();
 		camCtrl.target = page.camera;
-		camCtrl.destinationBasis = mask;
-		camCtrl.sourceBasis = storyboard.transform;
-		camCtrl.Jump();
-		camCtrl.positionDamping = page.camCtrl.positionDamping;
-		camCtrl.rotationDamping = page.camCtrl.rotationDamping;
+		camCtrl.transformCtrl = camera.gameObject.AddComponent<TransformController>();
+		camCtrl.transformCtrl.destinationBasis = mask;
+		camCtrl.transformCtrl.sourceBasis = storyboard.transform;
+		camCtrl.transformCtrl.positionDamping = page.camCtrl.transformCtrl.positionDamping;
+		camCtrl.transformCtrl.rotationDamping = page.camCtrl.transformCtrl.rotationDamping;
 	}
 }
