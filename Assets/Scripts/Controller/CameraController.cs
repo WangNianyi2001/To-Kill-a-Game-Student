@@ -5,6 +5,14 @@ public class CameraController : Controller<Camera> {
 	[NonSerialized] public new Camera camera = null;
 	[NonSerialized] public TransformController transformCtrl;
 
+	public override Camera Target {
+		get => base.Target;
+		set {
+			base.Target = value;
+			transformCtrl.Target = value.transform;
+		}
+	}
+
 	public static CameraController CreateOn(GameObject gameObject) {
 		var ctrl = gameObject.AddComponent<CameraController>();
 		ctrl.transformCtrl = gameObject.AddComponent<TransformController>();
@@ -15,7 +23,7 @@ public class CameraController : Controller<Camera> {
 		if(camera == null)
 			camera = GetComponent<Camera>();
 		transformCtrl = GetComponent<TransformController>() ?? gameObject.AddComponent<TransformController>();
-		transformCtrl.target = target.transform;
+		transformCtrl.Target = target.transform;
 	}
 
 	public override void Step() {

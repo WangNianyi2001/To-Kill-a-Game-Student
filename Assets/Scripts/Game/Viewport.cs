@@ -58,7 +58,7 @@ public class Viewport : MonoBehaviour {
 
 		// Camera controller
 		camCtrl = CameraController.CreateOn(camera.gameObject);
-		camCtrl.target = page.camera;
+		camCtrl.Target = page.camera;
 		camCtrl.transformCtrl.destinationBasis = mask;
 		camCtrl.transformCtrl.sourceBasis = storyboard.transform;
 		camCtrl.transformCtrl.positionDamping = page.camCtrl.transformCtrl.positionDamping;

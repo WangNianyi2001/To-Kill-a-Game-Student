@@ -37,16 +37,22 @@ public class Storyboard : MonoBehaviour {
 		Visible,
 	}
 	public void SetState(State state) {
-		viewport.Visible = state != State.Disabled;
-		var viewportCtrl = viewport.camCtrl;
-		viewportCtrl.enabled = true;
-		if(state == State.Active) {
-			viewportCtrl.transformCtrl.sourceBasis = viewport.mask;
-			viewportCtrl.target = viewport.soulCamera;
-		}
-		else {
-			viewportCtrl.target = page.camera;
-			viewportCtrl.transformCtrl.sourceBasis = transform;
+		switch(type) {
+			case Type.Plain:
+				break;
+			case Type.Viewport:
+				viewport.Visible = state != State.Disabled;
+				var viewportCtrl = viewport.camCtrl;
+				viewportCtrl.enabled = true;
+				if(state == State.Active) {
+					viewportCtrl.transformCtrl.sourceBasis = viewport.mask;
+					viewportCtrl.Target = viewport.soulCamera;
+				}
+				else {
+					viewportCtrl.Target = page.camera;
+					viewportCtrl.transformCtrl.sourceBasis = transform;
+				}
+				break;
 		}
 	}
 }

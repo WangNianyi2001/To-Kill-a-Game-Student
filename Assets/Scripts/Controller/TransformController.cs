@@ -11,11 +11,15 @@ public class TransformController : Controller<Transform> {
 	public float rotationDamping = 0;
 
 	public void Jump() {
+		if(target == null)
+			return;
 		transform.position = target.position;
 		transform.rotation = target.rotation;
 	}
 
 	public override void Step() {
+		if(target == null)
+			return;
 		var localPosition = sourceBasis == null ? target.position : sourceBasis.worldToLocalMatrix.MultiplyPoint(target.position);
 		var position = destinationBasis == null ? localPosition : destinationBasis.localToWorldMatrix.MultiplyPoint(localPosition);
 		var localRotation = sourceBasis == null ? target.rotation : Quaternion.Inverse(sourceBasis.rotation) * target.rotation;

@@ -430,8 +430,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eecb925550ccc4c458ea957269e2a813, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  protagonist: {fileID: 5321250}
-  storyboard: {fileID: 668383698}
+  storyboard: {fileID: 700631790}
 --- !u!1 &62310084
 GameObject:
   m_ObjectHideFlags: 0
@@ -1532,7 +1531,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57fd251b0a7f04c48b17822fb67d014a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useDepth: 0
+  materials: []
 --- !u!1 &1094346094
 GameObject:
   m_ObjectHideFlags: 0

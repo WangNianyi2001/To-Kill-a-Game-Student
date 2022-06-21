@@ -10,7 +10,7 @@ public class PostProcess : MonoBehaviour {
 		var renderingCamObj = new GameObject("Rendering Camera");
 		renderingCamObj.transform.parent = transform;
 		renderingCam = renderingCamObj.AddComponent<Camera>();
-		CameraController.CreateOn(renderingCamObj).target = targetCam;
+		CameraController.CreateOn(renderingCamObj).Target = targetCam;
 	}
 
 	static RenderTexture CreateRenderTexture(RenderTexture reference) {

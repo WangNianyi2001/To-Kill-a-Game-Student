@@ -23,7 +23,9 @@ public class Protagonist : MonoBehaviour {
 		transform.rotation = Quaternion.Euler(euler);
 	}
 
-	void OnMovement(InputValue value) {
+	public void OnMovement(InputValue value) {
+		if(controlBase == null)
+			return;
 		Vector2 vec2 = value.Get<Vector2>();
 		movement = Vector3.zero;
 		movement += controlBase.right * vec2.x;
