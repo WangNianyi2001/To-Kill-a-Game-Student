@@ -19,19 +19,22 @@ public class PostProcess : MonoBehaviour {
 		return RenderTexture.GetTemporary(Screen.width, Screen.height, 24);
 	}
 
-	RenderTexture buffer;
+	ImageBuffer buffer = new ImageBuffer();
 	public List<Material> materials;
 
 	void OnPreRender() {
-		buffer = CreateRenderTexture(targetCam.targetTexture);
-		renderingCam.targetTexture = buffer;
+		buffer.Update(targetCam.targetTexture);
+		renderingCam.targetTexture = buffer.rt;
 		renderingCam.Render();
 	}
 	
 	void OnRenderImage(RenderTexture source, RenderTexture destination) {
 		foreach(var mat in materials)
-			Graphics.Blit(buffer, buffer, mat);
-		Graphics.Blit(buffer, destination);
-		buffer.Release();
+			Graphics.Blit(buffer.rt, buffer.rt, mat);
+		Graphics.Blit(buffer.rt, destination);
+	}
+
+	void OnDestroy() {
+		buffer.Dispose();
 	}
 }

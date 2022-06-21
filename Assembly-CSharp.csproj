@@ -66,6 +66,7 @@
     <Compile Include="Assets\Scripts\Game\Storyboard.cs" />
     <Compile Include="Assets\Scripts\Game\ViewportTrigger.cs" />
     <Compile Include="Assets\Scripts\Game\Page.cs" />
+    <Compile Include="Assets\Scripts\PostProcess\ImageBuffer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shaders\ViewportMask.shader" />
