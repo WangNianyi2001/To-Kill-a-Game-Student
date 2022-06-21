@@ -56,15 +56,16 @@
     <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Protagonist.cs" />
+    <Compile Include="Assets\Scripts\Game\Protagonist.cs" />
+    <Compile Include="Assets\Scripts\PostProcess\PostProcess.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\Controller\CameraController.cs" />
     <Compile Include="Assets\Scripts\Controller\Controller.cs" />
-    <Compile Include="Assets\Scripts\Viewport.cs" />
-    <Compile Include="Assets\Scripts\Storyboard.cs" />
-    <Compile Include="Assets\Scripts\ViewportTrigger.cs" />
-    <Compile Include="Assets\Scripts\Page.cs" />
+    <Compile Include="Assets\Scripts\Game\Viewport.cs" />
     <Compile Include="Assets\Scripts\Controller\TransformController.cs" />
+    <Compile Include="Assets\Scripts\Game\Storyboard.cs" />
+    <Compile Include="Assets\Scripts\Game\ViewportTrigger.cs" />
+    <Compile Include="Assets\Scripts\Game\Page.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shaders\ViewportMask.shader" />
