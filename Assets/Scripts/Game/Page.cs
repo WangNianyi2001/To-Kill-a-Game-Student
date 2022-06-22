@@ -2,16 +2,18 @@ using System;
 using UnityEngine;
 
 public class Page : MonoBehaviour {
-	public static Page current = null;
 	[NonSerialized] public new Camera camera;
-	[NonSerialized] public CameraController camCtrl;
 	[NonSerialized] public Protagonist protagonist;
 
+	public int stencilResolution = 64;
 	public Storyboard storyboard;
 
 	public void ViewStoryboard(Storyboard target) {
-		storyboard?.SetState(Storyboard.State.Visible);
-		target?.SetState(Storyboard.State.Active);
+		if(storyboard != null)
+			storyboard.state = Storyboard.State.Visible;
+		if(target != null)
+			target.state = Storyboard.State.Active;
+		var camCtrl = camera.GetComponent<CameraController>();
 		camCtrl.enabled = target != null;
 		camCtrl.Target = target?.soulCamera;
 		camCtrl.transformCtrl.sourceBasis = target?.@base;
@@ -20,9 +22,8 @@ public class Page : MonoBehaviour {
 	}
 
 	void Start() {
-		current = this;
 		camera = GetComponentInChildren<Camera>();
-		camCtrl = CameraController.CreateOn(camera.gameObject);
+		CameraController.CreateOn(camera.gameObject);
 		protagonist = FindObjectOfType<Protagonist>();
 
 		// Disable all camera in scene

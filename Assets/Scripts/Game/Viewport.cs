@@ -11,20 +11,14 @@ public class Viewport : MonoBehaviour {
 
 	public byte stencilID;
 
-	[NonSerialized] public new Camera camera;
+	[NonSerialized] public ViewportCamera vpCam;
 	[NonSerialized] public CameraController camCtrl;
-	[NonSerialized] public Transform mask;
-	[NonSerialized] public Material maskMaterial;
-
-	public bool Visible {
-		get => camera.enabled;
-		set => camera.enabled = value;
-	}
+	public new Camera camera => vpCam?.camera;
 
 	public void UpdateCamera(Transform root, Transform target) {
 		var camPos = root.worldToLocalMatrix.MultiplyPoint(target.position);
-		camera.transform.position = mask.localToWorldMatrix.MultiplyPoint(camPos);
-		camera.transform.rotation = mask.rotation * Quaternion.Inverse(root.rotation) * target.rotation;
+		camera.transform.position = transform.localToWorldMatrix.MultiplyPoint(camPos);
+		camera.transform.rotation = transform.rotation * Quaternion.Inverse(root.rotation) * target.rotation;
 	}
 
 	void Awake() {
@@ -41,8 +35,7 @@ public class Viewport : MonoBehaviour {
 		// Create camera
 		var camObj = new GameObject("Camera");
 		camObj.transform.SetParent(transform);
-		camObj.transform.localScale = Vector3.one;
-		camera = camObj.AddComponent<Camera>();
+		vpCam = ViewportCamera.CreateOn(camObj);
 		camera.depth = 1;
 		camera.clearFlags = CameraClearFlags.Nothing;
 	}
@@ -50,18 +43,11 @@ public class Viewport : MonoBehaviour {
 	public void Init(Storyboard storyboard) {
 		this.storyboard = storyboard;
 		page = storyboard.page;
-		camera.enabled = true;
-
-		// Create viewport mask
-		maskMaterial = new Material(Shader.Find("ViewportMask"));
-		maskMaterial.SetInteger("_StencilID", stencilID);
 
 		// Camera controller
-		camCtrl = CameraController.CreateOn(camera.gameObject);
+		camCtrl = CameraController.CreateOn(vpCam.gameObject);
 		camCtrl.Target = page.camera;
-		camCtrl.transformCtrl.destinationBasis = mask;
+		camCtrl.transformCtrl.destinationBasis = transform;
 		camCtrl.transformCtrl.sourceBasis = storyboard.transform;
-		camCtrl.transformCtrl.positionDamping = page.camCtrl.transformCtrl.positionDamping;
-		camCtrl.transformCtrl.rotationDamping = page.camCtrl.transformCtrl.rotationDamping;
 	}
 }

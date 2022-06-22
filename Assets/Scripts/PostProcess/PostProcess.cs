@@ -2,39 +2,32 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PostProcess : MonoBehaviour {
-	Camera targetCam;
-	Camera renderingCam;
+	[System.NonSerialized] public new Camera camera;
+	PostProcessCamera ppc;
+	public List<Material> materials = new List<Material>();
 
-	void Start() {
-		targetCam = GetComponent<Camera>();
-		var renderingCamObj = new GameObject("Rendering Camera");
-		renderingCamObj.transform.parent = transform;
-		renderingCam = renderingCamObj.AddComponent<Camera>();
-		CameraController.CreateOn(renderingCamObj).Target = targetCam;
+	protected virtual void Start() {
+		if(camera == null)
+			camera = GetComponent<Camera>();
+		ppc = PostProcessCamera.CreateOn(this);
 	}
 
-	static RenderTexture CreateRenderTexture(RenderTexture reference) {
-		if(reference != null)
-			return new RenderTexture(reference);
-		return RenderTexture.GetTemporary(Screen.width, Screen.height, 24);
-	}
-
-	ImageBuffer buffer = new ImageBuffer();
-	public List<Material> materials;
+	protected ImageBuffer buffer = new ImageBuffer();
+	public RenderTexture bufferTex => buffer.rt;
 
 	void OnPreRender() {
-		buffer.Update(targetCam.targetTexture);
-		renderingCam.targetTexture = buffer.rt;
-		renderingCam.Render();
+		if(buffer.Update(camera?.targetTexture))
+			ppc.UpdateDest(buffer);
+		ppc.camera.Render();
 	}
-	
-	void OnRenderImage(RenderTexture source, RenderTexture destination) {
+
+	protected virtual void OnRenderImage(RenderTexture source, RenderTexture destination) {
 		foreach(var mat in materials)
 			Graphics.Blit(buffer.rt, buffer.rt, mat);
 		Graphics.Blit(buffer.rt, destination);
 	}
 
 	void OnDestroy() {
-		buffer.Dispose();
+		buffer?.Dispose();
 	}
 }

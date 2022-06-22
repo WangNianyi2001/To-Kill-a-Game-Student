@@ -58,20 +58,22 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Game\Protagonist.cs" />
     <Compile Include="Assets\Scripts\PostProcess\PostProcess.cs" />
+    <Compile Include="Assets\Scripts\Game\PageCamera.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\Controller\CameraController.cs" />
     <Compile Include="Assets\Scripts\Controller\Controller.cs" />
+    <Compile Include="Assets\Scripts\Game\ViewportCamera.cs" />
     <Compile Include="Assets\Scripts\Game\Viewport.cs" />
     <Compile Include="Assets\Scripts\Controller\TransformController.cs" />
     <Compile Include="Assets\Scripts\Game\Storyboard.cs" />
     <Compile Include="Assets\Scripts\Game\ViewportTrigger.cs" />
-    <Compile Include="Assets\Scripts\Game\Page.cs" />
     <Compile Include="Assets\Scripts\PostProcess\ImageBuffer.cs" />
+    <Compile Include="Assets\Scripts\Game\Page.cs" />
+    <Compile Include="Assets\Scripts\PostProcess\PostProcessCamera.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Shaders\ViewportMask.shader" />
+    <None Include="Assets\Shaders\StencilPass.shader" />
     <None Include="Assets\Shaders\StencilWrite.shader" />
-    <None Include="Assets\Shaders\StencilToColor.shader" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

@@ -14,6 +14,12 @@ public class Storyboard : MonoBehaviour {
 	public Camera soulCamera;
 	[NonSerialized] public Transform @base;
 
+	void Start() {
+		var pos = transform.localPosition;
+		pos.z -= .1f;
+		transform.localPosition = pos;
+	}
+
 	public void Init(Page page) {
 		this.page = page;
 		switch(type) {
@@ -24,7 +30,8 @@ public class Storyboard : MonoBehaviour {
 				viewport.Init(this);
 				soulCamera = viewport.camera;
 				@base = viewport.transform;
-				var material = new Material(Shader.Find("StencilWrite"));
+				var material = new Material(Shader.Find("Custom/StencilWrite"));
+				material.SetInteger("_Resolution", page.stencilResolution);
 				material.SetInteger("_StencilID", viewport.stencilID);
 				GetComponent<RawImage>().material = material;
 				break;
@@ -36,23 +43,27 @@ public class Storyboard : MonoBehaviour {
 		Active,
 		Visible,
 	}
-	public void SetState(State state) {
-		switch(type) {
-			case Type.Plain:
-				break;
-			case Type.Viewport:
-				viewport.Visible = state != State.Disabled;
-				var viewportCtrl = viewport.camCtrl;
-				viewportCtrl.enabled = true;
-				if(state == State.Active) {
-					viewportCtrl.transformCtrl.sourceBasis = viewport.mask;
-					viewportCtrl.Target = viewport.soulCamera;
-				}
-				else {
-					viewportCtrl.Target = page.camera;
-					viewportCtrl.transformCtrl.sourceBasis = transform;
-				}
-				break;
+	private State _state;
+	public State state {
+		get => _state;
+		set {
+			_state = value;
+			switch(type) {
+				case Type.Plain:
+					break;
+				case Type.Viewport:
+					var viewportCtrl = viewport.camCtrl;
+					viewportCtrl.enabled = true;
+					if(value == State.Active) {
+						viewportCtrl.transformCtrl.sourceBasis = viewport.transform;
+						viewportCtrl.Target = viewport.soulCamera;
+					}
+					else {
+						viewportCtrl.Target = page.camera;
+						viewportCtrl.transformCtrl.sourceBasis = transform;
+					}
+					break;
+			}
 		}
 	}
 }

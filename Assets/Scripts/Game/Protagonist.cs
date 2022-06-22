@@ -8,11 +8,14 @@ public class Protagonist : MonoBehaviour {
 	new SpriteRenderer renderer;
 	Vector3 movement;
 	[NonSerialized] public Transform controlBase;
+	public Page page;
 
 	void Start() {
 		agent = GetComponent<NavMeshAgent>();
 		agent.updateRotation = false;
 		renderer = GetComponent<SpriteRenderer>();
+		if(page == null)
+			page = FindObjectOfType<Page>();
 	}
 
 	public void FaceTo(Vector3 position) {
@@ -36,7 +39,7 @@ public class Protagonist : MonoBehaviour {
 	}
 
 	void Update() {
-		var camera = Page.current?.storyboard?.viewport?.camera;
+		var camera = page.storyboard?.viewport?.camera;
 		if(camera != null)
 			FaceTo(camera.transform.position);
 		agent.velocity = movement;
