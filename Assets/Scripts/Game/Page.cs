@@ -13,6 +13,7 @@ public class Page : MonoBehaviour {
 	public void ViewStoryboard(Storyboard target) {
 		if(storyboard != null)
 			storyboard.state = Storyboard.State.Visible;
+		storyboard = target;
 		if(target != null)
 			target.state = Storyboard.State.Active;
 		var camCtrl = camera.GetComponent<CameraController>();

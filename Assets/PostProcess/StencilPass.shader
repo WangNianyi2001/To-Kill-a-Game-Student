@@ -12,6 +12,7 @@ Shader "Custom/StencilPass" {
 			HLSLPROGRAM
 			#pragma vertex vert
 			#pragma fragment frag
+			#define EPS .002f
 
 			#include "UnityCG.cginc"
 
@@ -40,9 +41,10 @@ Shader "Custom/StencilPass" {
 			fixed4 frag(vertexOutput i) : SV_Target {
 				float4 base = tex2D(_MainTex, i.texcoord);
 				float4 replacement = tex2D(_Replacement, i.texcoord);
-				float rb = 1 - ceil(base[0] * base[2]);
+				replacement[3] *= base[3];
+				float rb = 1 - step(EPS, ceil(base[0] + base[2]));
 				float stencil = 1 - (round(base[1] * _Resolution) - _StencilID);
-				stencil *= step(.002f, base[1]);
+				stencil *= step(EPS, base[1]);
 				float threshold = step(.5f, rb) * step(.5f, stencil);
 				return lerp(base, replacement, threshold);
 			}

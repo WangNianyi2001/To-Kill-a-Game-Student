@@ -38,8 +38,8 @@ public class Protagonist : MonoBehaviour {
 			renderer.flipX = vec2.x < 0;
 	}
 
-	void Update() {
-		var camera = page.storyboard?.viewport?.camera;
+	void FixedUpdate() {
+		var camera = page.storyboard?.soulCamera;
 		if(camera != null)
 			FaceTo(camera.transform.position);
 		agent.velocity = movement;

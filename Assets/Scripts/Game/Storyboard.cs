@@ -30,7 +30,9 @@ public class Storyboard : MonoBehaviour {
 				viewport.Init(this);
 				soulCamera = viewport.camera;
 				@base = viewport.transform;
+				var texture = GetComponent<RawImage>().texture;
 				var material = new Material(Shader.Find("Custom/StencilWrite"));
+				material.SetTexture("_MainTex", texture);
 				material.SetInteger("_Resolution", page.stencilResolution);
 				material.SetInteger("_StencilID", viewport.stencilID);
 				GetComponent<RawImage>().material = material;
