@@ -4,9 +4,11 @@ using UnityEngine;
 public class Page : MonoBehaviour {
 	[NonSerialized] public new Camera camera;
 	[NonSerialized] public Protagonist protagonist;
+	public Storyboard storyboard;
 
 	public int stencilResolution = 64;
-	public Storyboard storyboard;
+	[NonSerialized] public Material stencilPassMat;
+	public Material comicMat;
 
 	public void ViewStoryboard(Storyboard target) {
 		if(storyboard != null)
@@ -23,8 +25,11 @@ public class Page : MonoBehaviour {
 
 	void Start() {
 		camera = GetComponentInChildren<Camera>();
-		CameraController.CreateOn(camera.gameObject);
+		PageCamera.CreateOn(this);
+		CameraController.CreateOn(camera);
 		protagonist = FindObjectOfType<Protagonist>();
+		stencilPassMat = new Material(Shader.Find("Custom/StencilPass"));
+		stencilPassMat.SetInteger("_Resolution", stencilResolution);
 
 		// Disable all camera in scene
 		foreach(Camera camera in FindObjectsOfType<Camera>())

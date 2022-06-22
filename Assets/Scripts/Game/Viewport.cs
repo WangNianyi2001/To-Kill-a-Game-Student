@@ -13,7 +13,7 @@ public class Viewport : MonoBehaviour {
 
 	[NonSerialized] public ViewportCamera vpCam;
 	[NonSerialized] public CameraController camCtrl;
-	public new Camera camera => vpCam?.camera;
+	public new Camera camera;
 
 	public void UpdateCamera(Transform root, Transform target) {
 		var camPos = root.worldToLocalMatrix.MultiplyPoint(target.position);
@@ -35,9 +35,8 @@ public class Viewport : MonoBehaviour {
 		// Create camera
 		var camObj = new GameObject("Camera");
 		camObj.transform.SetParent(transform);
-		vpCam = ViewportCamera.CreateOn(camObj);
+		camera = camObj.AddComponent<Camera>();
 		camera.depth = 1;
-		camera.clearFlags = CameraClearFlags.Nothing;
 	}
 
 	public void Init(Storyboard storyboard) {
@@ -45,7 +44,8 @@ public class Viewport : MonoBehaviour {
 		page = storyboard.page;
 
 		// Camera controller
-		camCtrl = CameraController.CreateOn(vpCam.gameObject);
+		vpCam = ViewportCamera.CreateOn(this);
+		camCtrl = CameraController.CreateOn(camera);
 		camCtrl.Target = page.camera;
 		camCtrl.transformCtrl.destinationBasis = transform;
 		camCtrl.transformCtrl.sourceBasis = storyboard.transform;

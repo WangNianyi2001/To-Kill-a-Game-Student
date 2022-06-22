@@ -13,9 +13,11 @@ public class CameraController : Controller<Camera> {
 		}
 	}
 
-	public static CameraController CreateOn(GameObject gameObject) {
-		var ctrl = gameObject.AddComponent<CameraController>();
-		ctrl.transformCtrl = gameObject.AddComponent<TransformController>();
+	public static CameraController CreateOn(Camera camera) {
+		var ctrl = camera.gameObject.AddComponent<CameraController>();
+		ctrl.target = camera;
+		ctrl.transformCtrl = camera.gameObject.AddComponent<TransformController>();
+		ctrl.transformCtrl.target = camera.transform;
 		return ctrl;
 	}
 

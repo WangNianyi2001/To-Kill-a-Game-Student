@@ -22,8 +22,13 @@ public class PostProcess : MonoBehaviour {
 	}
 
 	protected virtual void OnRenderImage(RenderTexture source, RenderTexture destination) {
-		foreach(var mat in materials)
-			Graphics.Blit(buffer.rt, buffer.rt, mat);
+		var tempBuffer = new ImageBuffer();
+		tempBuffer.Update(buffer.rt);
+		foreach(var mat in materials) {
+			Graphics.Blit(buffer.rt, tempBuffer.rt, mat);
+			Graphics.Blit(tempBuffer.rt, buffer.rt);
+		}
+		tempBuffer.Dispose();
 		Graphics.Blit(buffer.rt, destination);
 	}
 

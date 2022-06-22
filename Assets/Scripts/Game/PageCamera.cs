@@ -2,16 +2,11 @@
 
 public class PageCamera : PostProcess {
 	public Page page;
-	Material stencilPassMat;
 
-	protected override void Start() {
-		base.Start();
-		if(page == null)
-			page = transform.GetComponent<Page>();
-		if(page == null)
-			page = FindObjectOfType<Page>();
-		stencilPassMat = new Material(Shader.Find("Custom/StencilPass"));
-		stencilPassMat.SetInteger("_Resolution", page.stencilResolution);
+	public static PageCamera CreateOn(Page page) {
+		var pc = page.camera.gameObject.AddComponent<PageCamera>();
+		pc.page = page;
+		return pc;
 	}
 
 	protected override void OnRenderImage(RenderTexture source, RenderTexture destination) {
@@ -23,9 +18,9 @@ public class PageCamera : PostProcess {
 			if(storyboard.type != Storyboard.Type.Viewport)
 				continue;
 			storyboard.viewport.camera.Render();
-			stencilPassMat.SetTexture("_Replacement", storyboard.viewport.vpCam.bufferTex);
-			stencilPassMat.SetInteger("_StencilID", storyboard.viewport.stencilID);
-			Graphics.Blit(buffer.rt, tempBuffer.rt, stencilPassMat);
+			page.stencilPassMat.SetTexture("_Replacement", storyboard.viewport.vpCam.bufferTex);
+			page.stencilPassMat.SetInteger("_StencilID", storyboard.viewport.stencilID);
+			Graphics.Blit(buffer.rt, tempBuffer.rt, page.stencilPassMat);
 			Graphics.Blit(tempBuffer.rt, buffer.rt);
 		}
 		tempBuffer.Dispose();

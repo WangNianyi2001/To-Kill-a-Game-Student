@@ -1,11 +1,9 @@
-using UnityEngine;
-
 public class ViewportCamera : PostProcess {
-	public static ViewportCamera CreateOn(GameObject gameObject) {
-		var vpCam = gameObject.AddComponent<ViewportCamera>();
-		vpCam.camera = gameObject.GetComponent<Camera>();
-		if(vpCam.camera == null)
-			vpCam.camera = gameObject.AddComponent<Camera>();
-		return vpCam;
+	public Viewport viewport;
+
+	public static ViewportCamera CreateOn(Viewport viewport) {
+		var vpc = viewport.camera.gameObject.AddComponent<ViewportCamera>();
+		vpc.materials.Add(viewport.page.comicMat);
+		return vpc;
 	}
 }

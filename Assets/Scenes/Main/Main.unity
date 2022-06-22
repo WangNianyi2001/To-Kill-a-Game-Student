@@ -431,8 +431,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eecb925550ccc4c458ea957269e2a813, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stencilResolution: 32
   storyboard: {fileID: 700631790}
+  stencilResolution: 32
+  comicMat: {fileID: 2100000, guid: 54a8e3673b5ff7141bdba837ea2eb250, type: 2}
 --- !u!1 &62310084
 GameObject:
   m_ObjectHideFlags: 0
@@ -1393,6 +1394,7 @@ MonoBehaviour:
   soulCamera: {fileID: 1042102724}
   trigger: {fileID: 1743481729}
   stencilID: 1
+  camera: {fileID: 0}
 --- !u!212 &731287303
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1455,7 +1457,6 @@ GameObject:
   m_Component:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
-  - component: {fileID: 963194230}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1521,20 +1522,6 @@ Transform:
   m_Father: {fileID: 43293719}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!114 &963194230
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 963194225}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f49f5e64fb16bc647a0a1471bdd6b499, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  materials: []
-  page: {fileID: 0}
 --- !u!20 &1042102724 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 5074891396407033897, guid: 25e45b5cca83d6740827acef1f44f26a, type: 3}
@@ -1841,6 +1828,7 @@ MonoBehaviour:
   soulCamera: {fileID: 1764612608}
   trigger: {fileID: 1758662454}
   stencilID: 2
+  camera: {fileID: 0}
 --- !u!212 &1376303771
 SpriteRenderer:
   m_ObjectHideFlags: 0

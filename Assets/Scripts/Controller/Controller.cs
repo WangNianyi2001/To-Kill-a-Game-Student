@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 public abstract class Controller<T> : MonoBehaviour where T : Object {
-	protected T target;
+	public T target;
 	public virtual T Target {
 		get => target;
 		set => target = value;
