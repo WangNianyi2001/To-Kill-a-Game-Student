@@ -9,7 +9,7 @@ public class CameraController : Controller<Camera> {
 		get => base.Target;
 		set {
 			base.Target = value;
-			transformCtrl.Target = value.transform;
+			transformCtrl.Target = value?.transform;
 		}
 	}
 
