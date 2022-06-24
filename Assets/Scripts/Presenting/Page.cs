@@ -32,13 +32,14 @@ public class Page : MonoBehaviour {
 		stencilPassMat = new Material(Shader.Find("Custom/StencilPass"));
 		stencilPassMat.SetInteger("_Resolution", stencilResolution);
 
-		// Disable all camera in scene
+		foreach(Storyboard storyboard in FindObjectsOfType<Storyboard>()) {
+			storyboard.Init(this);
+			storyboard.state = Storyboard.State.Disabled;
+		}
+
 		foreach(Camera camera in FindObjectsOfType<Camera>())
 			camera.enabled = false;
 		camera.enabled = true;
-
-		foreach(Storyboard storyboard in FindObjectsOfType<Storyboard>())
-			storyboard.Init(this);
 
 		ViewStoryboard(storyboard);
 	}

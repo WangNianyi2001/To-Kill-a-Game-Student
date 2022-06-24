@@ -11,19 +11,25 @@ public class Storyboard : MonoBehaviour {
 	public Type type;
 
 	public Viewport viewport;
-	public Camera soulCamera;
+	public float cameraDistance = 5;
+	[NonSerialized] public Camera soulCamera;
 	[NonSerialized] public Transform @base;
 
-	void Start() {
-		var pos = transform.localPosition;
-		pos.z -= .1f;
-		transform.localPosition = pos;
+	public void Start() {
+		var collider = gameObject.AddComponent<BoxCollider2D>();
+		collider.size = (transform as RectTransform).sizeDelta;
 	}
 
 	public void Init(Page page) {
 		this.page = page;
 		switch(type) {
 			case Type.Plain:
+				var soulCamObj = new GameObject("Camera");
+				var t = soulCamObj.transform;
+				t.parent = transform;
+				t.localPosition = new Vector3(0, 0, -cameraDistance);
+				t.localRotation = Quaternion.identity;
+				soulCamera = soulCamObj.AddComponent<Camera>();
 				@base = transform;
 				break;
 			case Type.Viewport:
@@ -52,6 +58,7 @@ public class Storyboard : MonoBehaviour {
 			_state = value;
 			switch(type) {
 				case Type.Plain:
+					gameObject.SetActive(value != State.Disabled);
 					break;
 				case Type.Viewport:
 					var viewportCtrl = viewport.camCtrl;

@@ -31,5 +31,6 @@ public class CameraController : Controller<Camera> {
 	public override void Step() {
 		if(camera == null || target == null)
 			return;
+		camera.fieldOfView = target.fieldOfView;
 	}
 }

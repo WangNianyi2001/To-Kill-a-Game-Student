@@ -27,9 +27,6 @@ public class Viewport : MonoBehaviour {
 
 	void Start() {
 		stencilID = nextStencilID++;
-
-		if(trigger != null)
-			trigger.viewport = this;
 		Destroy(GetComponent<SpriteRenderer>());
 
 		// Create camera
