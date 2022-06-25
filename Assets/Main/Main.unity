@@ -335,9 +335,9 @@ MonoBehaviour:
   color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   textStyle: 1
   textStyleColor: {r: 0, g: 0, b: 0, a: 1}
-  defaultUseMessage: (spacebar to interact)
+  defaultUseMessage: Space to Interact
   useKey: 32
-  useButton: Fire2
+  useButton: 
   enableTouch: 0
   touchArea:
     origin: 0
@@ -483,6 +483,23 @@ MonoBehaviour:
   storyboard: {fileID: 62310086}
   stencilResolution: 64
   comicMat: {fileID: 2100000, guid: 54a8e3673b5ff7141bdba837ea2eb250, type: 2}
+  interactionInput:
+    m_Name: Interaction Input
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: b783f493-797a-4d61-8f56-a10002527e19
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 73dea2e9-6e7d-4d64-a852-4025671d2cab
+      m_Path: <Mouse>/leftButton
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Interaction Input
+      m_Flags: 0
+    m_Flags: 0
 --- !u!1 &50044903
 GameObject:
   m_ObjectHideFlags: 0
@@ -660,7 +677,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 274b80ab5b659c646ba9338870d14625, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  overrideName: Aaahahhh
+  overrideName: 
   overrideUseMessage: 
   maxUseDistance: 1000
   events:
@@ -949,6 +966,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11424616, guid: 58ac37417e60e534f91138088a3e6f70, type: 3}
+      propertyPath: keyButtonsToCheck.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11424616, guid: 58ac37417e60e534f91138088a3e6f70, type: 3}
+      propertyPath: keyButtonsToCheck.Array.data[0]
+      value: Interact
+      objectReference: {fileID: 0}
     - target: {fileID: 11426072, guid: 58ac37417e60e534f91138088a3e6f70, type: 3}
       propertyPath: initialDatabase
       value: 
@@ -1005,6 +1030,14 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 25e45b5cca83d6740827acef1f44f26a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -72235297812776954, guid: 25e45b5cca83d6740827acef1f44f26a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.22990692
+      objectReference: {fileID: 0}
+    - target: {fileID: -72235297812776954, guid: 25e45b5cca83d6740827acef1f44f26a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.018568514
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 25e45b5cca83d6740827acef1f44f26a, type: 3}
       propertyPath: m_Name
@@ -1158,6 +1191,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 409109652}
   m_CullTransparentMesh: 1
+--- !u!4 &413512993 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -2851639253768935049, guid: 25e45b5cca83d6740827acef1f44f26a, type: 3}
+  m_PrefabInstance: {fileID: 374264353}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &440124900
 GameObject:
   m_ObjectHideFlags: 0
@@ -1264,6 +1302,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 495101065}
   m_CullTransparentMesh: 1
+--- !u!1 &548589249
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 548589250}
+  m_Layer: 0
+  m_Name: Starting Position
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &548589250
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 548589249}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.0295, y: -0.0053, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 413512993}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &582778591
 GameObject:
   m_ObjectHideFlags: 0
@@ -1549,6 +1618,7 @@ GameObject:
   - component: {fileID: 700631791}
   - component: {fileID: 700631793}
   - component: {fileID: 700631796}
+  - component: {fileID: 700631797}
   - component: {fileID: 700631790}
   m_Layer: 0
   m_Name: Jar
@@ -1627,6 +1697,55 @@ MonoBehaviour:
     y: 0
     width: 0.76
     height: 1
+--- !u!114 &700631797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 700631788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 274b80ab5b659c646ba9338870d14625, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  overrideName: 
+  overrideUseMessage: 
+  maxUseDistance: 1000
+  events:
+    onSelect:
+      m_PersistentCalls:
+        m_Calls: []
+    onDeselect:
+      m_PersistentCalls:
+        m_Calls: []
+    onUse:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 43293723}
+          m_TargetAssemblyTypeName: Page, Assembly-CSharp
+          m_MethodName: ViewStoryboard
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 668383698}
+            m_ObjectArgumentAssemblyTypeName: Storyboard, Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 5321253}
+          m_TargetAssemblyTypeName: Protagonist, Assembly-CSharp
+          m_MethodName: TeleportTo
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 548589250}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Transform, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &731287300
 GameObject:
   m_ObjectHideFlags: 0
@@ -1988,8 +2107,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.021483706, y: 0.01723491, z: 0.003898431}
-  m_Center: {x: 0.00080056663, y: -0.0020185001, z: 0.0016554603}
+  m_Size: {x: 0.011134059, y: 0.0042560627, z: 0.003898431}
+  m_Center: {x: 0.0000074774025, y: -0.008507939, z: 0.0016554603}
 --- !u!1 &934317922
 GameObject:
   m_ObjectHideFlags: 0
@@ -2146,12 +2265,12 @@ MonoBehaviour:
     outOfRange: {fileID: 0}
     width: 64
     height: 64
-  useKey: 32
-  useButton: Fire2
-  defaultUseMessage: (spacebar to interact)
+  useKey: 0
+  useButton: Interact
+  defaultUseMessage: 
   broadcastToChildren: 1
   actorTransform: {fileID: 0}
-  tooFarMessage: Too Far
+  tooFarMessage: 
   onSelectedUsable:
     m_PersistentCalls:
       m_Calls: []
@@ -2178,6 +2297,7 @@ GameObject:
   - component: {fileID: 1094346097}
   - component: {fileID: 1094346099}
   - component: {fileID: 1094346098}
+  - component: {fileID: 1094346100}
   - component: {fileID: 1094346096}
   m_Layer: 0
   m_Name: Falling 3
@@ -2256,6 +2376,43 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1094346094}
   m_CullTransparentMesh: 1
+--- !u!114 &1094346100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1094346094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 274b80ab5b659c646ba9338870d14625, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  overrideName: 
+  overrideUseMessage: 
+  maxUseDistance: 1000
+  events:
+    onSelect:
+      m_PersistentCalls:
+        m_Calls: []
+    onDeselect:
+      m_PersistentCalls:
+        m_Calls: []
+    onUse:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 43293723}
+          m_TargetAssemblyTypeName: Page, Assembly-CSharp
+          m_MethodName: ViewStoryboard
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 1939147296}
+            m_ObjectArgumentAssemblyTypeName: Storyboard, Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1238619918
 GameObject:
   m_ObjectHideFlags: 0
@@ -2484,7 +2641,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   overrideName: 
   overrideUseMessage: 
-  maxUseDistance: 5
+  maxUseDistance: 1000
   events:
     onSelect:
       m_PersistentCalls:
@@ -2494,7 +2651,19 @@ MonoBehaviour:
         m_Calls: []
     onUse:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 43293723}
+          m_TargetAssemblyTypeName: Page, Assembly-CSharp
+          m_MethodName: ViewStoryboard
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 1094346096}
+            m_ObjectArgumentAssemblyTypeName: Storyboard, Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1330137496
 GameObject:
   m_ObjectHideFlags: 0
@@ -3115,6 +3284,7 @@ GameObject:
   - component: {fileID: 1939147302}
   - component: {fileID: 1939147301}
   - component: {fileID: 1939147300}
+  - component: {fileID: 1939147303}
   - component: {fileID: 1939147296}
   m_Layer: 0
   m_Name: Blinking
@@ -3230,9 +3400,46 @@ MonoBehaviour:
   m_UVRect:
     serializedVersion: 2
     x: 0.62
-    y: 0
+    y: 0.06
     width: 0.33
     height: 0.88
+--- !u!114 &1939147303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1939147294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 274b80ab5b659c646ba9338870d14625, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  overrideName: 
+  overrideUseMessage: 
+  maxUseDistance: 1000
+  events:
+    onSelect:
+      m_PersistentCalls:
+        m_Calls: []
+    onDeselect:
+      m_PersistentCalls:
+        m_Calls: []
+    onUse:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 43293723}
+          m_TargetAssemblyTypeName: Page, Assembly-CSharp
+          m_MethodName: ViewStoryboard
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 700631790}
+            m_ObjectArgumentAssemblyTypeName: Storyboard, Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1986918143
 GameObject:
   m_ObjectHideFlags: 0

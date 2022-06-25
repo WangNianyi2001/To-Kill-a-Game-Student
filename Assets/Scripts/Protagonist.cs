@@ -26,6 +26,12 @@ public class Protagonist : MonoBehaviour {
 		transform.rotation = Quaternion.Euler(euler);
 	}
 
+	public void TeleportTo(Transform destination) {
+		agent.enabled = false;
+		transform.position = destination.position;
+		agent.enabled = true;
+	}
+
 	public void OnMovement(InputValue value) {
 		if(controlBase == null)
 			return;

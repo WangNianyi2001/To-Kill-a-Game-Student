@@ -30,6 +30,7 @@ public class Storyboard : MonoBehaviour {
 				t.localPosition = new Vector3(0, 0, -cameraDistance);
 				t.localRotation = Quaternion.identity;
 				soulCamera = soulCamObj.AddComponent<Camera>();
+				soulCamera.enabled = false;
 				@base = transform;
 				break;
 			case Type.Viewport:
@@ -56,9 +57,9 @@ public class Storyboard : MonoBehaviour {
 		get => _state;
 		set {
 			_state = value;
+			gameObject.SetActive(value != State.Disabled);
 			switch(type) {
 				case Type.Plain:
-					gameObject.SetActive(value != State.Disabled);
 					break;
 				case Type.Viewport:
 					var viewportCtrl = viewport.camCtrl;

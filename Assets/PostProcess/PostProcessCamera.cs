@@ -34,5 +34,6 @@ public class PostProcessCamera : MonoBehaviour {
 	void OnDestroy() {
 		cb.Release();
 		buffer?.Dispose();
+		Destroy(gameObject);
 	}
 }

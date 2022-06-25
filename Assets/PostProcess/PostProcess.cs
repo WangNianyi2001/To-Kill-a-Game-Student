@@ -34,5 +34,7 @@ public class PostProcess : MonoBehaviour {
 
 	void OnDestroy() {
 		buffer?.Dispose();
+		Destroy(ppc);
+		Destroy(gameObject);
 	}
 }

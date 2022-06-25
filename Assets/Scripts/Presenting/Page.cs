@@ -1,5 +1,7 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using PixelCrushers;
 
 public class Page : MonoBehaviour {
 	[NonSerialized] public new Camera camera;
@@ -9,6 +11,8 @@ public class Page : MonoBehaviour {
 	public int stencilResolution = 64;
 	[NonSerialized] public Material stencilPassMat;
 	public Material comicMat;
+
+	public InputAction interactionInput;
 
 	public void ViewStoryboard(Storyboard target) {
 		if(storyboard != null)
@@ -25,6 +29,7 @@ public class Page : MonoBehaviour {
 	}
 
 	void Start() {
+		InputDeviceManager.RegisterInputAction("Interact", interactionInput);
 		camera = GetComponentInChildren<Camera>();
 		PageCamera.CreateOn(this);
 		CameraController.CreateOn(camera);

@@ -16,6 +16,7 @@ public class ImageBuffer : IDisposable {
 	}
 
 	public void Dispose() {
-		rt?.Release();
+		if(rt != null)
+			RenderTexture.ReleaseTemporary(rt);
 	}
 }
