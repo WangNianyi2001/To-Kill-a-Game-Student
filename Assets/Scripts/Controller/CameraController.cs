@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
+[RequireComponent(typeof(TransformController))]
 public class CameraController : Controller<Camera> {
 	[NonSerialized] public new Camera camera = null;
 	[NonSerialized] public TransformController transformCtrl;
@@ -16,7 +17,7 @@ public class CameraController : Controller<Camera> {
 	public static CameraController CreateOn(Camera camera) {
 		var ctrl = camera.gameObject.AddComponent<CameraController>();
 		ctrl.target = camera;
-		ctrl.transformCtrl = camera.gameObject.AddComponent<TransformController>();
+		ctrl.transformCtrl = camera.gameObject.GetComponent<TransformController>();
 		ctrl.transformCtrl.target = camera.transform;
 		return ctrl;
 	}
@@ -32,5 +33,7 @@ public class CameraController : Controller<Camera> {
 		if(camera == null || target == null)
 			return;
 		camera.fieldOfView = target.fieldOfView;
+		camera.clearFlags = target.clearFlags;
+		camera.backgroundColor = target.backgroundColor;
 	}
 }

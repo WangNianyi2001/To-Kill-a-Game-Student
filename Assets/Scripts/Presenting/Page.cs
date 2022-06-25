@@ -4,9 +4,11 @@ using UnityEngine.InputSystem;
 using PixelCrushers;
 
 public class Page : MonoBehaviour {
-	[NonSerialized] public new Camera camera;
+	public Camera mainCamera;
+	public Camera anchorCamera;
 	[NonSerialized] public Protagonist protagonist;
 	public Storyboard storyboard;
+	public GameObject sceneStaticRoot;
 
 	public int stencilResolution = 64;
 	[NonSerialized] public Material stencilPassMat;
@@ -20,7 +22,7 @@ public class Page : MonoBehaviour {
 		storyboard = target;
 		if(target != null)
 			target.state = Storyboard.State.Active;
-		var camCtrl = camera.GetComponent<CameraController>();
+		var camCtrl = mainCamera.GetComponent<CameraController>();
 		camCtrl.enabled = target != null;
 		camCtrl.Target = target?.soulCamera;
 		camCtrl.transformCtrl.sourceBasis = target?.@base;
@@ -30,9 +32,8 @@ public class Page : MonoBehaviour {
 
 	void Start() {
 		InputDeviceManager.RegisterInputAction("Interact", interactionInput);
-		camera = GetComponentInChildren<Camera>();
 		PageCamera.CreateOn(this);
-		CameraController.CreateOn(camera);
+		CameraController.CreateOn(anchorCamera);
 		protagonist = FindObjectOfType<Protagonist>();
 		stencilPassMat = new Material(Shader.Find("Custom/StencilPass"));
 		stencilPassMat.SetInteger("_Resolution", stencilResolution);
@@ -42,9 +43,11 @@ public class Page : MonoBehaviour {
 			storyboard.state = Storyboard.State.Disabled;
 		}
 
-		foreach(Camera camera in FindObjectsOfType<Camera>())
+		foreach(Camera camera in sceneStaticRoot.GetComponentsInChildren<Camera>()) {
 			camera.enabled = false;
-		camera.enabled = true;
+			camera.clearFlags = CameraClearFlags.Color;
+			camera.backgroundColor = Color.black;
+		}
 
 		ViewStoryboard(storyboard);
 	}

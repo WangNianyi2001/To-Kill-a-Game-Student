@@ -69,7 +69,7 @@ public class Storyboard : MonoBehaviour {
 						viewportCtrl.Target = viewport.soulCamera;
 					}
 					else {
-						viewportCtrl.Target = page.camera;
+						viewportCtrl.Target = page.mainCamera;
 						viewportCtrl.transformCtrl.sourceBasis = transform;
 					}
 					break;

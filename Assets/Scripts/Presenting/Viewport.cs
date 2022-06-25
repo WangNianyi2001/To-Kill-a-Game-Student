@@ -34,6 +34,7 @@ public class Viewport : MonoBehaviour {
 		camObj.transform.SetParent(transform);
 		camera = camObj.AddComponent<Camera>();
 		camera.depth = 1;
+		camera.enabled = false;
 	}
 
 	public void Init(Storyboard storyboard) {
@@ -43,7 +44,7 @@ public class Viewport : MonoBehaviour {
 		// Camera controller
 		vpCam = ViewportCamera.CreateOn(this);
 		camCtrl = CameraController.CreateOn(camera);
-		camCtrl.Target = page.camera;
+		camCtrl.Target = page.mainCamera;
 		camCtrl.transformCtrl.destinationBasis = transform;
 		camCtrl.transformCtrl.sourceBasis = storyboard.transform;
 	}

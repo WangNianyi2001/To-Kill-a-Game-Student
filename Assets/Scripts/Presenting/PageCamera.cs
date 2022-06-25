@@ -4,7 +4,7 @@ public class PageCamera : PostProcess {
 	public Page page;
 
 	public static PageCamera CreateOn(Page page) {
-		var pc = page.camera.gameObject.AddComponent<PageCamera>();
+		var pc = page.mainCamera.gameObject.AddComponent<PageCamera>();
 		pc.page = page;
 		return pc;
 	}
