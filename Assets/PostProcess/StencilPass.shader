@@ -33,6 +33,10 @@ Shader "Custom/StencilPass" {
 				return o;
 			}
 
+			float CloseEnough(float a, float b) {
+				return 1 - step(EPS, abs(a - b));
+			}
+
 			sampler2D _MainTex;
 			sampler2D _Replacement;
 			int _StencilID;
@@ -40,13 +44,9 @@ Shader "Custom/StencilPass" {
 
 			fixed4 frag(vertexOutput i) : SV_Target {
 				float4 base = tex2D(_MainTex, i.texcoord);
-				float4 replacement = tex2D(_Replacement, i.texcoord);
-				replacement[3] *= base[3];
-				float rb = 1 - step(EPS, ceil(base[0] + base[2]));
-				float stencil = 1 - (round(base[1] * _Resolution) - _StencilID);
-				stencil *= step(EPS, base[1]);
-				float threshold = step(.5f, rb) * step(.5f, stencil);
-				return lerp(base, replacement, threshold);
+				float rb = CloseEnough(base[0] + base[2], 0);
+				float stencil = CloseEnough(round(base[1] * _Resolution), _StencilID);
+				return lerp(base, tex2D(_Replacement, i.texcoord), rb * stencil);
 			}
 			ENDHLSL
 		}

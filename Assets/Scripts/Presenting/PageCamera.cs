@@ -2,16 +2,24 @@
 
 public class PageCamera : PostProcess {
 	public Page page;
+	public CameraController anchorCam;
 
 	public static PageCamera CreateOn(Page page) {
-		var pc = page.mainCamera.gameObject.AddComponent<PageCamera>();
+		var camera = page.camera;
+		var pc = camera.gameObject.AddComponent<PageCamera>();
 		pc.page = page;
+		CameraController.CreateOn(camera);
+		var anchorCamObj = new GameObject();
+		anchorCamObj.transform.SetParent(pc.transform.parent);
+		anchorCamObj.AddComponent<Camera>().enabled = false;
+		pc.anchorCam = anchorCamObj.AddComponent<CameraController>();
 		return pc;
 	}
 
 	protected override void OnRenderImage(RenderTexture source, RenderTexture destination) {
 		var tempBuffer = new ImageBuffer();
 		tempBuffer.Update(buffer.rt);
+		page.stencilPassMat.SetInteger("_Resolution", page.stencilResolution);
 		foreach(var storyboard in FindObjectsOfType<Storyboard>()) {
 			if(storyboard.state == Storyboard.State.Disabled)
 				continue;

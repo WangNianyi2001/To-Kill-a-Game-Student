@@ -6,7 +6,7 @@ public class Storyboard : MonoBehaviour {
 	[NonSerialized] public Page page;
 
 	public enum Type {
-		Plain, Viewport
+		None, Plain, Viewport
 	}
 	public Type type;
 
@@ -22,6 +22,7 @@ public class Storyboard : MonoBehaviour {
 
 	public void Init(Page page) {
 		this.page = page;
+		transform.localPosition += Vector3.forward * -.01f;
 		switch(type) {
 			case Type.Plain:
 				var soulCamObj = new GameObject("Camera");
@@ -69,11 +70,16 @@ public class Storyboard : MonoBehaviour {
 						viewportCtrl.Target = viewport.soulCamera;
 					}
 					else {
-						viewportCtrl.Target = page.mainCamera;
+						viewportCtrl.Target = page.camera;
 						viewportCtrl.transformCtrl.sourceBasis = transform;
 					}
 					break;
 			}
 		}
 	}
+	public bool visibility {
+		set => state = value ? State.Visible : State.Disabled;
+	}
+
+	public void ViewThis() => page.ViewStoryboard(this);
 }

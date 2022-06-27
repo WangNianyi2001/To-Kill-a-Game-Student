@@ -6,9 +6,7 @@ Shader "Custom/StencilWrite" {
 	}
 
 	SubShader {
-
 		Tags {
-			"Queue" = "Transparent+1"
 			"RenderType" = "Transparent"
 		}
 
@@ -46,9 +44,9 @@ Shader "Custom/StencilWrite" {
 
 			fixed4 frag(vertexOutput i) : SV_Target{
 				float4 baseColor = tex2D(_MainTex, i.texcoord);
-				float g = _StencilID;
-				g /= _Resolution;
-				float4 color = { 0, g, 0, baseColor[3] };
+				float g = (float)_StencilID / _Resolution;
+				float a = step(.5f, baseColor[3]);
+				float4 color = { 0, g, 0, a };
 				return color;
 			}
 			ENDHLSL

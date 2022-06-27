@@ -26,7 +26,7 @@ public class CameraController : Controller<Camera> {
 		if(camera == null)
 			camera = GetComponent<Camera>();
 		transformCtrl = GetComponent<TransformController>() ?? gameObject.AddComponent<TransformController>();
-		transformCtrl.Target = target.transform;
+		transformCtrl.Target = target?.transform;
 	}
 
 	public override void Step() {

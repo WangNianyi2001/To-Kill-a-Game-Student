@@ -4,8 +4,8 @@ using UnityEngine.InputSystem;
 using PixelCrushers;
 
 public class Page : MonoBehaviour {
-	public Camera mainCamera;
-	public Camera anchorCamera;
+	public new Camera camera;
+	PageCamera pc;
 	[NonSerialized] public Protagonist protagonist;
 	public Storyboard storyboard;
 	public GameObject sceneStaticRoot;
@@ -22,7 +22,7 @@ public class Page : MonoBehaviour {
 		storyboard = target;
 		if(target != null)
 			target.state = Storyboard.State.Active;
-		var camCtrl = mainCamera.GetComponent<CameraController>();
+		var camCtrl = camera.GetComponent<CameraController>();
 		camCtrl.enabled = target != null;
 		camCtrl.Target = target?.soulCamera;
 		camCtrl.transformCtrl.sourceBasis = target?.@base;
@@ -32,11 +32,9 @@ public class Page : MonoBehaviour {
 
 	void Start() {
 		InputDeviceManager.RegisterInputAction("Interact", interactionInput);
-		PageCamera.CreateOn(this);
-		CameraController.CreateOn(anchorCamera);
+		pc = PageCamera.CreateOn(this);
 		protagonist = FindObjectOfType<Protagonist>();
 		stencilPassMat = new Material(Shader.Find("Custom/StencilPass"));
-		stencilPassMat.SetInteger("_Resolution", stencilResolution);
 
 		foreach(Storyboard storyboard in FindObjectsOfType<Storyboard>()) {
 			storyboard.Init(this);

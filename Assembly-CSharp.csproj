@@ -47,7 +47,7 @@
   <PropertyGroup>
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <UnityProjectGenerator>Package</UnityProjectGenerator>
-    <UnityProjectGeneratorVersion>2.0.15</UnityProjectGeneratorVersion>
+    <UnityProjectGeneratorVersion>2.0.16</UnityProjectGeneratorVersion>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
     <UnityVersion>2021.2.18f1c1</UnityVersion>
@@ -855,32 +855,53 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Dialogue System\Plugins\Pixel Crushers\Dialogue System\Prefabs\Art\Fonts\Orbitron\SIL Open Font License.txt" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\Dialogue System\Plugins\Pixel Crushers\Dialogue System\Scripts\UI\Unity UI\_README.txt" />
     <None Include="Assets\Animation2D\readme.txt" />
     <None Include="Assets\PostProcess\StencilPass.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
     <None Include="Assets\Dialogue System\Plugins\Pixel Crushers\Dialogue System\Prefabs\Camera Angle Studio\_README.txt" />
     <None Include="Assets\Dialogue System\Plugins\Pixel Crushers\Dialogue System\Prefabs\Art\Textures\Circle\_README.txt" />
     <None Include="Assets\Dialogue System\Plugins\Pixel Crushers\Dialogue System\Prefabs\Art\Textures\UnityUI\_README.txt" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
     <None Include="Assets\Dialogue System\Plugins\Pixel Crushers\Common\_README.txt" />
     <None Include="Assets\Dialogue System\Plugins\Pixel Crushers\Dialogue System\Demo\Scenes\New Input System\_New_Input_System_Setup.txt" />
     <None Include="Assets\PostProcess\StencilWrite.shader" />
     <None Include="Assets\Dialogue System\Plugins\Pixel Crushers\Dialogue System\Demo\_README.txt" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\Dialogue System\Plugins\Pixel Crushers\Dialogue System\Templates\Link\link_asmdef.xml" />
     <None Include="Assets\Shaders\ComicEffect.shader" />
     <None Include="Assets\Dialogue System\Plugins\Pixel Crushers\Dialogue System\Prefabs\Art\Textures\Shared Textures\_README.txt" />
     <None Include="Assets\Dialogue System\Plugins\Pixel Crushers\Dialogue System\Templates\Link\_README.txt" />
     <None Include="Assets\Dialogue System\Plugins\Pixel Crushers\Dialogue System\Prefabs\Art\Shared Audio\_README.txt" />
     <None Include="Assets\Dialogue System\Plugins\Pixel Crushers\Dialogue System\Wrappers\Shaders\LinesColoredBlended.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
+    <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
     <None Include="Assets\Dialogue System\Plugins\Pixel Crushers\Dialogue System\Prefabs\Art\Fonts\Bitwise Font\!license.txt" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
     <None Include="Assets\Dialogue System\Plugins\Pixel Crushers\Dialogue System\Scripts\UI\Legacy\_README.txt" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
     <None Include="Assets\Dialogue System\Plugins\Pixel Crushers\Dialogue System\Templates\Link\link.xml" />
     <None Include="Assets\Dialogue System\Plugins\Pixel Crushers\Dialogue System\Scripts\_README.txt" />
+    <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
     <None Include="Assets\Dialogue System\Plugins\Pixel Crushers\Dialogue System\Demo\Art\Sounds\_README.txt" />
     <None Include="Assets\Dialogue System\Plugins\Pixel Crushers\Dialogue System\_README.txt" />
     <None Include="Assets\Dialogue System\Plugins\Pixel Crushers\Dialogue System\Third Party Support\_README.txt" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
     <None Include="Assets\Dialogue System\Plugins\Pixel Crushers\Dialogue System\Scripts\Lua\Lua Interpreter\_README.txt" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
     <None Include="Assets\Animation2D\change_log.txt" />
+    <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
     <None Include="Assets\Dialogue System\Plugins\Pixel Crushers\Dialogue System\Templates\Scripts\_README.txt" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_Sprite.shader" />
     <None Include="Assets\Dialogue System\Plugins\Pixel Crushers\Dialogue System\Wrappers\Deprecated\_README.txt" />
   </ItemGroup>
   <ItemGroup>
