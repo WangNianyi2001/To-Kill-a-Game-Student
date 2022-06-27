@@ -1,19 +1,28 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
+
+public enum StoryboardState {
+	Disabled,
+	Active,
+	Visible,
+}
 
 public class Storyboard : MonoBehaviour {
 	[NonSerialized] public Page page;
+	[NonSerialized] public Camera soulCamera;
+	[NonSerialized] public Transform @base;
 
 	public enum Type {
 		None, Plain, Viewport
 	}
 	public Type type;
 
-	public Viewport viewport;
 	public float cameraDistance = 5;
-	[NonSerialized] public Camera soulCamera;
-	[NonSerialized] public Transform @base;
+
+	public Viewport viewport;
+	public bool grantControl = true;
 
 	public void Start() {
 		var collider = gameObject.AddComponent<BoxCollider2D>();
@@ -48,24 +57,19 @@ public class Storyboard : MonoBehaviour {
 		}
 	}
 
-	public enum State {
-		Disabled,
-		Active,
-		Visible,
-	}
-	private State _state;
-	public State state {
-		get => _state;
+	private StoryboardState state;
+	public StoryboardState State {
+		get => state;
 		set {
-			_state = value;
-			gameObject.SetActive(value != State.Disabled);
+			state = value;
+			gameObject.SetActive(value != StoryboardState.Disabled);
 			switch(type) {
 				case Type.Plain:
 					break;
 				case Type.Viewport:
 					var viewportCtrl = viewport.camCtrl;
 					viewportCtrl.enabled = true;
-					if(value == State.Active) {
+					if(value == StoryboardState.Active) {
 						viewportCtrl.transformCtrl.sourceBasis = viewport.transform;
 						viewportCtrl.Target = viewport.soulCamera;
 					}
@@ -78,8 +82,32 @@ public class Storyboard : MonoBehaviour {
 		}
 	}
 	public bool visibility {
-		set => state = value ? State.Visible : State.Disabled;
+		set => State = value ? StoryboardState.Visible : StoryboardState.Disabled;
 	}
 
-	public void ViewThis() => page.ViewStoryboard(this);
+	public void Blur() {
+		if(State == StoryboardState.Active)
+			State = StoryboardState.Visible;
+		var camCtrl = page.camera.GetComponent<CameraController>();
+		camCtrl.enabled = false;
+		camCtrl.Target = null;
+		camCtrl.transformCtrl.sourceBasis = null;
+		camCtrl.transformCtrl.destinationBasis = null;
+	}
+
+	public void Focus() {
+		State = StoryboardState.Active;
+		var camCtrl = page.camera.GetComponent<CameraController>();
+		camCtrl.enabled = true;
+		camCtrl.Target = soulCamera;
+		camCtrl.transformCtrl.sourceBasis = @base;
+		camCtrl.transformCtrl.destinationBasis = transform;
+		page.protagonist.controlBase = viewport?.trigger.transform;
+	}
+
+	[SerializeField] public UnityEvent onEscape;
+
+	public void OnEscape() {
+		onEscape?.Invoke();
+	}
 }

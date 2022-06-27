@@ -1,5 +1,5 @@
 {
-    "name": "Protagonist Control",
+    "name": "Input Actions",
     "maps": [
         {
             "name": "Protagonist",
@@ -70,6 +70,34 @@
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
+                }
+            ]
+        },
+        {
+            "name": "Page",
+            "id": "76ecdd55-0940-4a7f-97b9-647f7262a740",
+            "actions": [
+                {
+                    "name": "Escape",
+                    "type": "Button",
+                    "id": "29a3a934-af00-4d76-9bab-e0ac872aee37",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "90a15a15-3be9-4c41-98a9-13cf67e5449d",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Escape",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

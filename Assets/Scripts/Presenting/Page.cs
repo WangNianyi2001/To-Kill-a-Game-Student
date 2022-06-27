@@ -5,7 +5,6 @@ using PixelCrushers;
 
 public class Page : MonoBehaviour {
 	public new Camera camera;
-	PageCamera pc;
 	[NonSerialized] public Protagonist protagonist;
 	public Storyboard storyboard;
 	public GameObject sceneStaticRoot;
@@ -17,28 +16,20 @@ public class Page : MonoBehaviour {
 	public InputAction interactionInput;
 
 	public void ViewStoryboard(Storyboard target) {
-		if(storyboard != null)
-			storyboard.state = Storyboard.State.Visible;
+		storyboard?.Blur();
 		storyboard = target;
-		if(target != null)
-			target.state = Storyboard.State.Active;
-		var camCtrl = camera.GetComponent<CameraController>();
-		camCtrl.enabled = target != null;
-		camCtrl.Target = target?.soulCamera;
-		camCtrl.transformCtrl.sourceBasis = target?.@base;
-		camCtrl.transformCtrl.destinationBasis = target?.transform;
-		protagonist.controlBase = target?.viewport?.trigger.transform;
+		storyboard?.Focus();
 	}
 
 	void Start() {
 		InputDeviceManager.RegisterInputAction("Interact", interactionInput);
-		pc = PageCamera.CreateOn(this);
+		PageCamera.CreateOn(this);
 		protagonist = FindObjectOfType<Protagonist>();
 		stencilPassMat = new Material(Shader.Find("Custom/StencilPass"));
 
 		foreach(Storyboard storyboard in FindObjectsOfType<Storyboard>()) {
 			storyboard.Init(this);
-			storyboard.state = Storyboard.State.Disabled;
+			storyboard.State = StoryboardState.Disabled;
 		}
 
 		foreach(Camera camera in sceneStaticRoot.GetComponentsInChildren<Camera>()) {
@@ -48,5 +39,9 @@ public class Page : MonoBehaviour {
 		}
 
 		ViewStoryboard(storyboard);
+	}
+
+	public void OnEscape(InputValue _) {
+		storyboard?.SendMessage("OnEscape");
 	}
 }

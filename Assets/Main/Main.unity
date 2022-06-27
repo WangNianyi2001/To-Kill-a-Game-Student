@@ -381,6 +381,7 @@ GameObject:
   - component: {fileID: 43293722}
   - component: {fileID: 43293721}
   - component: {fileID: 43293720}
+  - component: {fileID: 43293724}
   - component: {fileID: 43293723}
   m_Layer: 0
   m_Name: Page
@@ -508,6 +509,36 @@ MonoBehaviour:
       m_Action: Interaction Input
       m_Flags: 0
     m_Flags: 0
+--- !u!114 &43293724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 43293718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 8ed1c16978c168f40b82d982c92e8d0d, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Page
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &62310084
 GameObject:
   m_ObjectHideFlags: 0
@@ -541,8 +572,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
-  viewport: {fileID: 0}
   cameraDistance: 2
+  viewport: {fileID: 0}
+  grantControl: 0
+  onEscape:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!224 &62310087
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1650,8 +1685,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
-  viewport: {fileID: 1376303770}
   cameraDistance: 10
+  viewport: {fileID: 1376303770}
+  grantControl: 0
+  onEscape:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!224 &668383699
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1742,8 +1781,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
-  viewport: {fileID: 0}
   cameraDistance: 4
+  viewport: {fileID: 0}
+  grantControl: 0
+  onEscape:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!224 &700631791
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2014,8 +2057,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
-  viewport: {fileID: 731287302}
   cameraDistance: 5
+  viewport: {fileID: 731287302}
+  grantControl: 0
+  onEscape:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &746271087
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2197,78 +2244,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 780882485}
   m_CullTransparentMesh: 1
---- !u!114 &847727369
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3708937867413447573}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c593457cd8105e148906690e1707c592, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  trigger: 32
-  condition:
-    luaConditions: []
-    questConditions: []
-    acceptedTags: []
-    acceptedGameObjects: []
-    luaWizardIndex: -1
-    lastEvaluationValue: 0
-  setQuestState: 1
-  questName: 
-  questState: 0
-  setQuestEntryState: 0
-  questEntryNumber: 1
-  questEntryState: 0
-  setAnotherQuestEntryState: 0
-  anotherQuestEntryNumber: 1
-  anotherQuestEntryState: 0
-  luaCode: 
-  sequence: 
-  sequenceSpeaker: {fileID: 0}
-  sequenceListener: {fileID: 0}
-  waitOneFrameOnStartOrEnable: 1
-  alertMessage: 
-  textTable: {fileID: 0}
-  alertDuration: 0
-  sendMessages: []
-  barkSource: 0
-  barkConversation: 
-  barkText: 
-  barkTextSequence: 
-  barker: {fileID: 0}
-  barkTarget: {fileID: 0}
-  barkOrder: 0
-  allowBarksDuringConversations: 0
-  skipBarkIfNoValidEntries: 0
-  cacheBarkLines: 0
-  conversation: Opening Drawer
-  conversationConversant: {fileID: 0}
-  conversationActor: {fileID: 0}
-  startConversationEntryID: -1
-  exclusive: 0
-  replace: 0
-  skipIfNoValidEntries: 0
-  preventRestartOnSameFrameEnded: 0
-  stopConversationOnTriggerExit: 0
-  stopConversationIfTooFar: 0
-  maxConversationDistance: 5
-  monitorConversationDistanceFrequency: 1
-  showCursorDuringConversation: 0
-  pauseGameDuringConversation: 0
-  setActiveActions: []
-  setEnabledActions: []
-  setAnimatorStateActions: []
-  onExecute:
-    m_PersistentCalls:
-      m_Calls: []
-  useConversationTitlePicker: 1
-  useBarkTitlePicker: 1
-  useQuestNamePicker: 1
-  selectedDatabase: {fileID: 11400000, guid: ca1060cfe02fd7e42b24563c954b5783, type: 2}
 --- !u!114 &847727370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2293,7 +2268,19 @@ MonoBehaviour:
         m_Calls: []
     onUse:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 43293723}
+          m_TargetAssemblyTypeName: Page, Assembly-CSharp
+          m_MethodName: ViewStoryboard
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 1592916026}
+            m_ObjectArgumentAssemblyTypeName: Storyboard, Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!65 &847727371
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2544,8 +2531,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
-  viewport: {fileID: 0}
   cameraDistance: 2.5
+  viewport: {fileID: 0}
+  grantControl: 0
+  onEscape:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!224 &1094346097
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3214,8 +3205,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
-  viewport: {fileID: 0}
   cameraDistance: 2.5
+  viewport: {fileID: 0}
+  grantControl: 0
+  onEscape:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!224 &1322152348
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3362,6 +3357,22 @@ MonoBehaviour:
           m_TargetAssemblyTypeName: Storyboard, Assembly-CSharp
           m_MethodName: ViewThis
           m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - guid: 0f4c4a42-6d32-434d-9851-776c12f41bb9
+    onExecute:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1292569326}
+          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_MethodName: SetActive
+          m_Mode: 6
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3721,8 +3732,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
-  viewport: {fileID: 428121387}
   cameraDistance: 5
+  viewport: {fileID: 428121387}
+  grantControl: 0
+  onEscape:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1563413841
 GameObject:
   m_ObjectHideFlags: 0
@@ -3811,6 +3826,66 @@ PrefabInstance:
     - target: {fileID: 268557836462429873, guid: 20fd344014dc3de4683d8bec9d2a67db, type: 3}
       propertyPath: cameraDistance
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 268557836462429873, guid: 20fd344014dc3de4683d8bec9d2a67db, type: 3}
+      propertyPath: onEscape.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 268557836462429873, guid: 20fd344014dc3de4683d8bec9d2a67db, type: 3}
+      propertyPath: onEscape.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 268557836462429873, guid: 20fd344014dc3de4683d8bec9d2a67db, type: 3}
+      propertyPath: onEscape.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 268557836462429873, guid: 20fd344014dc3de4683d8bec9d2a67db, type: 3}
+      propertyPath: onEscape.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 268557836462429873, guid: 20fd344014dc3de4683d8bec9d2a67db, type: 3}
+      propertyPath: onEscape.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 43293723}
+    - target: {fileID: 268557836462429873, guid: 20fd344014dc3de4683d8bec9d2a67db, type: 3}
+      propertyPath: onEscape.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1592916026}
+    - target: {fileID: 268557836462429873, guid: 20fd344014dc3de4683d8bec9d2a67db, type: 3}
+      propertyPath: onEscape.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 268557836462429873, guid: 20fd344014dc3de4683d8bec9d2a67db, type: 3}
+      propertyPath: onEscape.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 268557836462429873, guid: 20fd344014dc3de4683d8bec9d2a67db, type: 3}
+      propertyPath: onEscape.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ViewStoryboard
+      objectReference: {fileID: 0}
+    - target: {fileID: 268557836462429873, guid: 20fd344014dc3de4683d8bec9d2a67db, type: 3}
+      propertyPath: onEscape.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: set_visibility
+      objectReference: {fileID: 0}
+    - target: {fileID: 268557836462429873, guid: 20fd344014dc3de4683d8bec9d2a67db, type: 3}
+      propertyPath: onEscape.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Page, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 268557836462429873, guid: 20fd344014dc3de4683d8bec9d2a67db, type: 3}
+      propertyPath: onEscape.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: Storyboard, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 268557836462429873, guid: 20fd344014dc3de4683d8bec9d2a67db, type: 3}
+      propertyPath: onEscape.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 668383698}
+    - target: {fileID: 268557836462429873, guid: 20fd344014dc3de4683d8bec9d2a67db, type: 3}
+      propertyPath: onEscape.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: Storyboard, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 268557836462429873, guid: 20fd344014dc3de4683d8bec9d2a67db, type: 3}
+      propertyPath: onEscape.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 5899661312777008599, guid: 20fd344014dc3de4683d8bec9d2a67db, type: 3}
       propertyPath: m_Name
@@ -4172,8 +4247,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
-  viewport: {fileID: 0}
   cameraDistance: 4
+  viewport: {fileID: 0}
+  grantControl: 0
+  onEscape:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!224 &1939147297
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4491,8 +4570,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
-  viewport: {fileID: 450132883}
   cameraDistance: 5
+  viewport: {fileID: 450132883}
+  grantControl: 0
+  onEscape:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &2106493105
 GameObject:
   m_ObjectHideFlags: 0
@@ -4952,16 +5035,16 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5109653150558190161}
-  - {fileID: 905303906826046774}
-  - {fileID: 5156036634970926674}
-  - {fileID: 7505761629670958582}
-  - {fileID: 5858317972611388934}
-  - {fileID: 9150027083937933342}
-  - {fileID: 8322059912587231241}
   - {fileID: 6371732782854716246}
   - {fileID: 7438040194363317651}
+  - {fileID: 905303906826046774}
+  - {fileID: 5858317972611388934}
+  - {fileID: 9150027083937933342}
   - {fileID: 8172351469495443870}
+  - {fileID: 5156036634970926674}
+  - {fileID: 5109653150558190161}
+  - {fileID: 7505761629670958582}
+  - {fileID: 8322059912587231241}
   m_Father: {fileID: 211906058}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5153,7 +5236,7 @@ Transform:
   m_Children:
   - {fileID: 8198725034554708114}
   m_Father: {fileID: 543450653334418890}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &919132149393911664
 GameObject:
@@ -6350,7 +6433,6 @@ GameObject:
   - component: {fileID: 2974592744087998275}
   - component: {fileID: 8050577367683512054}
   - component: {fileID: 847727371}
-  - component: {fileID: 847727369}
   - component: {fileID: 847727370}
   m_Layer: 0
   m_Name: Drawer
@@ -6748,7 +6830,7 @@ Transform:
   m_Children:
   - {fileID: 2345602404188784430}
   m_Father: {fileID: 543450653334418890}
-  m_RootOrder: 0
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5125537700796826590
 GameObject:
@@ -6798,7 +6880,7 @@ Transform:
   m_Children:
   - {fileID: 3760046105469881330}
   m_Father: {fileID: 543450653334418890}
-  m_RootOrder: 2
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5344925136094684538
 GameObject:
@@ -7035,7 +7117,7 @@ Transform:
   - {fileID: 5864710276357923133}
   - {fileID: 3177027138529894917}
   m_Father: {fileID: 543450653334418890}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &5864710276357923133
 Transform:
@@ -7337,7 +7419,7 @@ Transform:
   - {fileID: 548589250}
   - {fileID: 1805948020}
   m_Father: {fileID: 543450653334418890}
-  m_RootOrder: 7
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &6372054602329023431
 Transform:
@@ -7937,7 +8019,7 @@ Transform:
   m_Children:
   - {fileID: 1223816595608769068}
   m_Father: {fileID: 543450653334418890}
-  m_RootOrder: 8
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7438888063747172377
 MeshFilter:
@@ -7986,7 +8068,7 @@ Transform:
   - {fileID: 9027626883092876943}
   - {fileID: 4001608338294733419}
   m_Father: {fileID: 543450653334418890}
-  m_RootOrder: 3
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!64 &7541251096041422826
 MeshCollider:
@@ -8342,7 +8424,7 @@ Transform:
   m_Children:
   - {fileID: 2710041831065401670}
   m_Father: {fileID: 543450653334418890}
-  m_RootOrder: 9
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &8198725034554708114
 Transform:
@@ -8404,7 +8486,7 @@ Transform:
   m_Children:
   - {fileID: 5948958796479691071}
   m_Father: {fileID: 543450653334418890}
-  m_RootOrder: 6
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &8327239066066567679
 Camera:
@@ -9031,7 +9113,7 @@ Transform:
   - {fileID: 7611968483166112968}
   - {fileID: 444714706204642556}
   m_Father: {fileID: 543450653334418890}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &9151136738743233063
 Transform:

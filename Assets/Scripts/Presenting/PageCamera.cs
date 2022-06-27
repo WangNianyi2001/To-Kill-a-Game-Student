@@ -21,7 +21,7 @@ public class PageCamera : PostProcess {
 		tempBuffer.Update(buffer.rt);
 		page.stencilPassMat.SetInteger("_Resolution", page.stencilResolution);
 		foreach(var storyboard in FindObjectsOfType<Storyboard>()) {
-			if(storyboard.state == Storyboard.State.Disabled)
+			if(storyboard.State == StoryboardState.Disabled)
 				continue;
 			if(storyboard.type != Storyboard.Type.Viewport)
 				continue;
