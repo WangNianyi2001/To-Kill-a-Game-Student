@@ -45,6 +45,7 @@ public class Storyboard : MonoBehaviour {
 				break;
 			case Type.Viewport:
 				viewport.Init(this);
+				page.anchor.Register(viewport.camCtrl);
 				soulCamera = viewport.camera;
 				@base = viewport.transform;
 				var texture = GetComponent<RawImage>().texture;
@@ -74,7 +75,7 @@ public class Storyboard : MonoBehaviour {
 						viewportCtrl.Target = viewport.soulCamera;
 					}
 					else {
-						viewportCtrl.Target = page.camera;
+						viewportCtrl.Target = page.pc.camera;
 						viewportCtrl.transformCtrl.sourceBasis = transform;
 					}
 					break;
@@ -88,21 +89,25 @@ public class Storyboard : MonoBehaviour {
 	public void Blur() {
 		if(State == StoryboardState.Active)
 			State = StoryboardState.Visible;
-		var camCtrl = page.camera.GetComponent<CameraController>();
-		camCtrl.enabled = false;
-		camCtrl.Target = null;
-		camCtrl.transformCtrl.sourceBasis = null;
-		camCtrl.transformCtrl.destinationBasis = null;
 	}
 
 	public void Focus() {
 		State = StoryboardState.Active;
-		var camCtrl = page.camera.GetComponent<CameraController>();
-		camCtrl.enabled = true;
-		camCtrl.Target = soulCamera;
-		camCtrl.transformCtrl.sourceBasis = @base;
-		camCtrl.transformCtrl.destinationBasis = transform;
-		page.protagonist.controlBase = viewport?.trigger.transform;
+		var pcct = page.anchor.controller.transformCtrl;
+		switch(type) {
+			case Type.Plain:
+				page.anchor.SetMaster(soulCamera);
+				pcct.sourceBasis = null;
+				pcct.destinationBasis = null;
+				break;
+			case Type.Viewport:
+				page.anchor.SetMaster(viewport.camera);
+				viewport.camCtrl.Target = viewport.soulCamera;
+				pcct.sourceBasis = viewport.transform;
+				pcct.destinationBasis = transform;
+				page.protagonist.controlBase = viewport.trigger.transform;
+				break;
+		}
 	}
 
 	[SerializeField] public UnityEvent onEscape;

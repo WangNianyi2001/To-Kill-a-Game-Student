@@ -9,7 +9,13 @@ public class PostProcess : MonoBehaviour {
 	protected virtual void Start() {
 		if(camera == null)
 			camera = GetComponent<Camera>();
-		ppc = PostProcessCamera.CreateOn(this);
+		ppc = GetComponentInChildren<PostProcessCamera>();
+		if(ppc == null) {
+			var ppcObj = new GameObject("Post Process Camera");
+			ppcObj.transform.parent = transform;
+			ppc = ppcObj.AddComponent<PostProcessCamera>();
+			ppc.pp = this;
+		}
 	}
 
 	protected ImageBuffer buffer = new ImageBuffer();

@@ -4,7 +4,8 @@ using UnityEngine.InputSystem;
 using PixelCrushers;
 
 public class Page : MonoBehaviour {
-	public new Camera camera;
+	public PageCamera pc;
+	public AnchorCamera anchor;
 	[NonSerialized] public Protagonist protagonist;
 	public Storyboard storyboard;
 	public GameObject sceneStaticRoot;
@@ -22,8 +23,8 @@ public class Page : MonoBehaviour {
 	}
 
 	void Start() {
+		anchor.Register(pc.controller);
 		InputDeviceManager.RegisterInputAction("Interact", interactionInput);
-		PageCamera.CreateOn(this);
 		protagonist = FindObjectOfType<Protagonist>();
 		stencilPassMat = new Material(Shader.Find("Custom/StencilPass"));
 

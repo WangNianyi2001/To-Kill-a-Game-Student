@@ -1,19 +1,14 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
+[RequireComponent(typeof(CameraController))]
 public class PageCamera : PostProcess {
 	public Page page;
-	public CameraController anchorCam;
+	[NonSerialized] public CameraController controller;
 
-	public static PageCamera CreateOn(Page page) {
-		var camera = page.camera;
-		var pc = camera.gameObject.AddComponent<PageCamera>();
-		pc.page = page;
-		CameraController.CreateOn(camera);
-		var anchorCamObj = new GameObject();
-		anchorCamObj.transform.SetParent(pc.transform.parent);
-		anchorCamObj.AddComponent<Camera>().enabled = false;
-		pc.anchorCam = anchorCamObj.AddComponent<CameraController>();
-		return pc;
+	protected override void Start() {
+		base.Start();
+		controller = GetComponent<CameraController>();
 	}
 
 	protected override void OnRenderImage(RenderTexture source, RenderTexture destination) {

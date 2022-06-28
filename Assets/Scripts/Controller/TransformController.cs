@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 
+[RequireComponent(typeof(Transform))]
 public class TransformController : Controller<Transform> {
 	public Transform sourceBasis = null;
 	public Transform destinationBasis = null;
@@ -10,14 +11,7 @@ public class TransformController : Controller<Transform> {
 	[Range(0, 100)]
 	public float rotationDamping = 0;
 
-	public void Jump() {
-		if(target == null)
-			return;
-		transform.position = target.position;
-		transform.rotation = target.rotation;
-	}
-
-	public override void Step() {
+	void FixedUpdate() {
 		if(target == null)
 			return;
 		var localPosition = sourceBasis == null ? target.position : sourceBasis.worldToLocalMatrix.MultiplyPoint(target.position);

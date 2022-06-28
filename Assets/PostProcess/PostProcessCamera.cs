@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Rendering;
 
+[RequireComponent(typeof(Camera), typeof(CameraController))]
 public class PostProcessCamera : MonoBehaviour {
 	[NonSerialized] public PostProcess pp;
 	public new Camera camera;
@@ -9,19 +10,12 @@ public class PostProcessCamera : MonoBehaviour {
 	CommandBuffer cb;
 	const CameraEvent cbEv = CameraEvent.AfterForwardAlpha;
 
-	public static PostProcessCamera CreateOn(PostProcess pp) {
-		var obj = new GameObject("Post Process Camera");
-		obj.transform.parent = pp.transform;
-		var ppc = obj.AddComponent<PostProcessCamera>();
-		ppc.camera = obj.AddComponent<Camera>();
-		ppc.camera.enabled = false;
-		CameraController.CreateOn(ppc.camera).Target = pp.camera;
-		return ppc;
-	}
-
 	void Start() {
+		camera = GetComponent<Camera>();
+		camera.enabled = false;
 		cb = new CommandBuffer();
 		camera.AddCommandBuffer(cbEv, cb);
+		GetComponent<CameraController>().Target = pp.camera;
 	}
 
 	public void UpdateDest(ImageBuffer dest) {

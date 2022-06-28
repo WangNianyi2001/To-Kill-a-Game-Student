@@ -261,6 +261,7 @@
     <Compile Include="Assets\Dialogue System\Plugins\Pixel Crushers\Dialogue System\Scripts\Editor\Dialogue Editor\Nodes\DialogueEditorWindowConversationNodeEditor.cs" />
     <Compile Include="Assets\Dialogue System\Plugins\Pixel Crushers\Dialogue System\Scripts\Editor\Inspectors\Triggers\ConversationPopupDrawer.cs" />
     <Compile Include="Assets\Dialogue System\Plugins\Pixel Crushers\Dialogue System\Scripts\Editor\UI\Standard UI\Selector UI\SelectorUseStandardUIElementsEditor.cs" />
+    <Compile Include="Assets\Scripts\Editor\Auxiliary.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Dialogue System\Plugins\Pixel Crushers\Dialogue System\Scripts\Editor\Fields\_README.txt" />

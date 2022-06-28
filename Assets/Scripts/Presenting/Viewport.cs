@@ -43,8 +43,9 @@ public class Viewport : MonoBehaviour {
 
 		// Camera controller
 		vpCam = ViewportCamera.CreateOn(this);
-		camCtrl = CameraController.CreateOn(camera);
-		camCtrl.Target = page.camera;
+		camCtrl = camera.gameObject.AddComponent<CameraController>();
+		camCtrl.SendMessage("Start");
+		camCtrl.Target = page.pc.camera;
 		camCtrl.transformCtrl.destinationBasis = transform;
 		camCtrl.transformCtrl.sourceBasis = storyboard.transform;
 	}

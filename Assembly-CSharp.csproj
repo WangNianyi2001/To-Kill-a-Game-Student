@@ -566,6 +566,7 @@
     <Compile Include="Assets\Dialogue System\Plugins\Pixel Crushers\Dialogue System\Scripts\UI\Legacy\Dialogue\Controls\UnityDialogueControls.cs" />
     <Compile Include="Assets\Dialogue System\Plugins\Pixel Crushers\Dialogue System\Scripts\Quests\QuestState.cs" />
     <Compile Include="Assets\Dialogue System\Plugins\Pixel Crushers\Dialogue System\Wrappers\Triggers\Interaction\SelectorFollowTarget.cs" />
+    <Compile Include="Assets\Scripts\Controller\AnchorCamera.cs" />
     <Compile Include="Assets\Dialogue System\Plugins\Pixel Crushers\Dialogue System\Scripts\MVC\Sequencer\Commands\SequencerCommandTextInput.cs" />
     <Compile Include="Assets\Dialogue System\Plugins\Pixel Crushers\Dialogue System\Wrappers\Manager\ExtraDatabases.cs" />
     <Compile Include="Assets\Dialogue System\Plugins\Pixel Crushers\Dialogue System\Scripts\Utility\Attributes\ActorPopupAttribute.cs" />
