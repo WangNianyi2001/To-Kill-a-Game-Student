@@ -184,8 +184,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Lorem ipsum
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: a01e6b06e3dca8e409d07c429ffba142, type: 2}
-  m_sharedMaterial: {fileID: 5808237357514020734, guid: a01e6b06e3dca8e409d07c429ffba142, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: f97a251f041534d438e9f979d009e700, type: 2}
+  m_sharedMaterial: {fileID: 6795390433062012180, guid: f97a251f041534d438e9f979d009e700, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -338,8 +338,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
-  viewport: {fileID: 0}
   cameraDistance: 5
+  viewport: {fileID: 0}
+  grantControl: 1
+  clickNext: 0
+  next: {fileID: 0}
+  onEscape:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &5486572746063875729
 GameObject:
   m_ObjectHideFlags: 0
@@ -402,5 +408,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
-  viewport: {fileID: 0}
   cameraDistance: 5
+  viewport: {fileID: 0}
+  grantControl: 1
+  clickNext: 0
+  next: {fileID: 0}
+  onEscape:
+    m_PersistentCalls:
+      m_Calls: []

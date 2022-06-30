@@ -33,11 +33,12 @@ public class Page : MonoBehaviour {
 			storyboard.State = StoryboardState.Disabled;
 		}
 
-		foreach(Camera camera in sceneStaticRoot.GetComponentsInChildren<Camera>()) {
+		foreach(Camera camera in FindObjectsOfType<Camera>()) {
 			camera.enabled = false;
 			camera.clearFlags = CameraClearFlags.Color;
 			camera.backgroundColor = Color.black;
 		}
+		pc.camera.enabled = true;
 
 		ViewStoryboard(storyboard);
 	}

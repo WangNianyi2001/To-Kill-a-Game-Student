@@ -6,4 +6,9 @@ public class ViewportCamera : PostProcess {
 		vpc.materials.Add(viewport.page.comicMat);
 		return vpc;
 	}
+
+	new void Start() {
+		base.Start();
+		transform.localScale = UnityEngine.Vector3.one;
+	}
 }

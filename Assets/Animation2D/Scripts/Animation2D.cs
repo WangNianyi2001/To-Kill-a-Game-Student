@@ -1,14 +1,9 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 
 [AddComponentMenu("Animation2D/Animation")]
-[RequireComponent(typeof(RawImage))]
-public class Animation2D : MonoBehaviour {
-	#region Public Variables
-	[Header("General Settings")]
-	public string animationName;
-
+public class Animation2D : ImageManipulator {
 	[Header("Settings Properties")]
+	public string animationName;
 
 	[Tooltip("Start animating in (in seconds).")]
 	[Range(0f, 1000f)]
@@ -18,117 +13,45 @@ public class Animation2D : MonoBehaviour {
 	[Range(0.01f, 1f)]
 	public float speed;
 
-	[Header("Autostart Settings")]
-
 	[Tooltip("Start animation automatically on startup, no need calling from an external code.")]
-	public bool automaticallyStart;
-
-	[Tooltip("Loop of animation, if this is checked then sprite will be animated forever.")]
-	public bool autoStartLoop;
-
-	[Tooltip("Reversion of animation, if this is checked then sprite will reverse animation when it's dope first loop")]
-	public bool autoStartReverse;
+	public bool autoStart;
+	public bool loop = false;
 
 	[Header("Frames & Resources")]
 	[Tooltip("Frames to switch in specific time interval.")]
-	public Texture[] frames;
-	#endregion
-	#region Public Variables (For API)
-	[HideInInspector]
-	public bool isPlaying = false;
-	#endregion
-	#region Private Variables
-	private RawImage image;
-	private ushort id;
-	private bool reverse = true;
-	private bool reversing = false;
-	private bool loop = false;
+	public Object[] frames;
 
-	private bool paused = false;
-	#endregion
+	const string stepCall = "Step";
+	public bool isPlaying => IsInvoking(stepCall);
 
-	private void Start() {
-		image = GetComponent<RawImage>();
+	private int index;
 
-		if(automaticallyStart) {
-			Play(autoStartReverse, autoStartLoop);
-		}
+	new void Start() {
+		base.Start();
+		if(autoStart)
+			Play();
 	}
 
-	private void Update() {
-		if(isPlaying && image != null) {
-			image.texture = frames[id];
+	public void Step() {
+		++index;
+		if(index == frames.Length) {
+			if(loop)
+				index = 0;
+			else
+				Pause();
 		}
+		SetImage(frames[index]);
 	}
 
-	private void PlayAnimation() {
-		if(!paused) {
-			isPlaying = true;
-
-			if(reverse) {
-				if(reversing) {
-					if(id > 0) {
-						id--;
-					}
-					else {
-						reversing = false;
-
-						if(!loop) {
-							isPlaying = false;
-							CancelInvoke("PlayAnimation");
-						}
-					}
-				}
-				else {
-					if(id < (frames.Length - 1)) {
-						id++;
-					}
-					else {
-						reversing = true;
-					}
-				}
-			}
-			else {
-				if(id < (frames.Length - 1)) {
-					id++;
-				}
-				else {
-					if(loop) {
-						id = 0;
-					}
-					else {
-						isPlaying = false;
-						CancelInvoke("PlayAnimation");
-					}
-				}
-			}
-		}
-		else {
-			isPlaying = false;
-		}
-	}
-
-	public void Play(bool reverse = false, bool loop = false, bool restart = false) {
-		paused = false;
-		this.reverse = reverse;
-		this.loop = loop;
-
-		if(IsInvoking("PlayAnimation")) {
-			CancelInvoke("PlayAnimation");
-		}
-
-		if(restart) {
-			id = (ushort)0;
-		}
-
-		InvokeRepeating("PlayAnimation", startIn, speed);
+	public void Play(bool reset = false) {
+		Pause();
+		if(reset)
+			index = 0;
+		InvokeRepeating(stepCall, startIn, speed);
 	}
 
 	public void Pause() {
-		paused = true;
-	}
-
-	public void Resume() {
-		paused = false;
+		if(isPlaying)
+			CancelInvoke(stepCall);
 	}
 }

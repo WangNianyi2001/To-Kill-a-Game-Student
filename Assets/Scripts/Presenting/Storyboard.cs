@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using PixelCrushers.DialogueSystem.Wrappers;
 
 public enum StoryboardState {
 	Disabled,
@@ -24,14 +25,24 @@ public class Storyboard : MonoBehaviour {
 	public Viewport viewport;
 	public bool grantControl = true;
 
+	public bool clickNext = false;
+	public Storyboard next;
+
 	public void Start() {
 		var collider = gameObject.AddComponent<BoxCollider2D>();
 		collider.size = (transform as RectTransform).sizeDelta;
+		if(clickNext) {
+			var usable = gameObject.AddComponent<Usable>();
+			usable.overrideName = "ä¯ÀÀ";
+			usable.maxUseDistance = 1000;
+			usable.events = new Usable.UsableEvents();
+			usable.events.onUse.AddListener(() => page.ViewStoryboard(next));
+		}
 	}
 
 	public void Init(Page page) {
 		this.page = page;
-		transform.localPosition += Vector3.forward * -.01f;
+		transform.localPosition += Vector3.back * .01f;
 		switch(type) {
 			case Type.Plain:
 				var soulCamObj = new GameObject("Camera");
@@ -89,6 +100,7 @@ public class Storyboard : MonoBehaviour {
 	public void Blur() {
 		if(State == StoryboardState.Active)
 			State = StoryboardState.Visible;
+		page.protagonist.grantControl = false;
 	}
 
 	public void Focus() {
@@ -105,7 +117,9 @@ public class Storyboard : MonoBehaviour {
 				viewport.camCtrl.Target = viewport.soulCamera;
 				pcct.sourceBasis = viewport.transform;
 				pcct.destinationBasis = transform;
-				page.protagonist.controlBase = viewport.trigger.transform;
+				if(viewport.trigger != null)
+					page.protagonist.controlBase = viewport.trigger.transform;
+				page.protagonist.grantControl = true;
 				break;
 		}
 	}

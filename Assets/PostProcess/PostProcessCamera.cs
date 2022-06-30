@@ -16,6 +16,8 @@ public class PostProcessCamera : MonoBehaviour {
 		cb = new CommandBuffer();
 		camera.AddCommandBuffer(cbEv, cb);
 		GetComponent<CameraController>().Target = pp.camera;
+		camera.clearFlags = pp.camera.clearFlags;
+		camera.backgroundColor = pp.camera.backgroundColor;
 	}
 
 	public void UpdateDest(ImageBuffer dest) {

@@ -9,11 +9,11 @@ public class Viewport : MonoBehaviour {
 	public Camera soulCamera;
 	public ViewportTrigger trigger = null;
 
-	public byte stencilID;
+	[NonSerialized] public byte stencilID;
 
 	[NonSerialized] public ViewportCamera vpCam;
 	[NonSerialized] public CameraController camCtrl;
-	public new Camera camera;
+	[NonSerialized] public new Camera camera;
 
 	public void UpdateCamera(Transform root, Transform target) {
 		var camPos = root.worldToLocalMatrix.MultiplyPoint(target.position);
@@ -28,6 +28,8 @@ public class Viewport : MonoBehaviour {
 	void Start() {
 		stencilID = nextStencilID++;
 		Destroy(GetComponent<SpriteRenderer>());
+		if(trigger != null)
+			trigger.viewport = this;
 
 		// Create camera
 		var camObj = new GameObject("Camera");
@@ -48,5 +50,9 @@ public class Viewport : MonoBehaviour {
 		camCtrl.Target = page.pc.camera;
 		camCtrl.transformCtrl.destinationBasis = transform;
 		camCtrl.transformCtrl.sourceBasis = storyboard.transform;
+	}
+
+	void OnDrawGizmos() {
+		Gizmos.DrawRay(transform.position, transform.forward);
 	}
 }

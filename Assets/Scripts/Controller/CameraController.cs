@@ -25,7 +25,5 @@ public class CameraController : Controller<Camera> {
 		if(camera == null || Target == null)
 			return;
 		camera.fieldOfView = Target.fieldOfView;
-		camera.clearFlags = Target.clearFlags;
-		camera.backgroundColor = Target.backgroundColor;
 	}
 }

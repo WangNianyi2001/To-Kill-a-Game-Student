@@ -15,6 +15,9 @@ public class StoryboardEditor : Editor {
 				EditorGUILayout.ObjectField(so.FindProperty("viewport"), typeof(Viewport));
 				break;
 		}
+		if(target.clickNext = EditorGUILayout.Toggle("Click Next", target.clickNext)) {
+			EditorGUILayout.PropertyField(so.FindProperty("next"));
+		}
 		EditorGUILayout.PropertyField(so.FindProperty("onEscape"));
 		if(EditorGUI.EndChangeCheck()) {
 			so.ApplyModifiedProperties();
